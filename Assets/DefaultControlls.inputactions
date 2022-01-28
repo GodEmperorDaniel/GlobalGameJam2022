@@ -7,9 +7,9 @@
             "actions": [
                 {
                     "name": "Moving",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "f834e8a3-e216-4e8f-98a5-e1e60ecde349",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 },
@@ -22,9 +22,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Jump",
+                    "name": "Jump/Climb",
                     "type": "Button",
                     "id": "2c827bbf-1950-4af2-9642-9673fe1921ec",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "PowerUp",
+                    "type": "Button",
+                    "id": "26a61a25-52dd-4f5f-a61d-ee30c6e78d57",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -89,7 +97,7 @@
                 {
                     "name": "",
                     "id": "7c901b0d-60d5-432e-9052-d8bebc4987fe",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -104,7 +112,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "Jump",
+                    "action": "Jump/Climb",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a952a4bf-e228-43c5-9524-ba4a44187c50",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PowerUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9414358d-54c6-4a4b-aeff-f485a7db5737",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PowerUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
