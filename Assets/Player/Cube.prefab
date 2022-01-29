@@ -91,6 +91,8 @@ GameObject:
   - component: {fileID: 7024563974438684065}
   - component: {fileID: -840821557785427707}
   - component: {fileID: 2882227074274052237}
+  - component: {fileID: 5049105544284870919}
+  - component: {fileID: 1603935133672376932}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -306,7 +308,7 @@ MonoBehaviour:
     m_ActionName: Character /PowerUp[/XInputControllerWindows/leftTrigger,/XInputControllerWindows/rightTrigger]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Controller
-  m_DefaultActionMap: 'Character '
+  m_DefaultActionMap: e395e0db-b775-4bd6-a259-5ee0ba7a82d7
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &-840821557785427707
@@ -340,3 +342,27 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &5049105544284870919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3256298911763180373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f503aa3b30436224ca987dc04dee6fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1603935133672376932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3256298911763180373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 115313b24ee13a24fafcd23a6f146d86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

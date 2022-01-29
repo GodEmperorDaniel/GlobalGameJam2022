@@ -2,7 +2,7 @@
     "name": "DefaultControlls",
     "maps": [
         {
-            "name": "Character ",
+            "name": "CharacterInput",
             "id": "4ed2ba22-e3f5-461f-907e-0191915714e7",
             "actions": [
                 {
@@ -135,6 +135,96 @@
                     "processors": "",
                     "groups": "",
                     "action": "PowerUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UIInput",
+            "id": "e395e0db-b775-4bd6-a259-5ee0ba7a82d7",
+            "actions": [
+                {
+                    "name": "Moving",
+                    "type": "Value",
+                    "id": "13ba86ba-c755-43b6-9a7e-cf94b91c6764",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Accept",
+                    "type": "Button",
+                    "id": "93e49e91-d82a-424c-9031-032bc0f555e9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "ControllerJoystick",
+                    "id": "3b48efb4-ebc1-44af-a797-ae764e9ee733",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Moving",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "6a3f166e-38b8-4a99-be23-754fe1552b95",
+                    "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Moving",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "c9190a03-7dc5-4bc4-aae5-6e074f9691d8",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Moving",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "5150154f-a2c7-4d57-aac4-0622dad5e50e",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Moving",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "cdbe7de9-2716-4802-9433-5faa7b353a62",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Moving",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "89aac4ee-cbeb-47f3-82f9-81e28695dc88",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Accept",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -13,16 +13,17 @@ public class UIManager : MonoBehaviour
     {
         UI = this;
     }
-
-    // Start is called before the first frame update
-    void Start()
+    public bool CheckIfBothSelectedCharacter()
     {
+        bool isGood = true;
+        foreach (CharacterInformation p in CharacterInformation.players)
+        {
+            if(isGood)
+            {
+                
+            }
+        }
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return true;
     }
 }

@@ -7,6 +7,7 @@ using TMPro;
 
 public class CharacterInformation : MonoBehaviour
 {
+    [HideInInspector] public static List<CharacterInformation> players;
     [Header("CharacterSelection")]
     public CharacterENUM _character;
     [Header("SpeedStats")]
@@ -24,6 +25,7 @@ public class CharacterInformation : MonoBehaviour
     public GameObject image;
     public GameObject parent;
     public GameObject defaultButton;
+    [Header("Playable Character")]
     public GameObject tilda;
     public GameObject mort;
 
@@ -58,7 +60,15 @@ public class CharacterInformation : MonoBehaviour
 
     private void Awake()
     {
+        if(!players.Contains(this))
+        {
+            players.Add(this);
+        }
         _character = (CharacterENUM)PlayerJoinAction._playerCount - 1;
+        if(UIManager.UI == null)
+        {
+            return;
+        }
         defaultButton = UIManager.UI.defaulButton;
         parent = UIManager.UI.gameObject; 
         spawnPlayerImage();
@@ -66,5 +76,5 @@ public class CharacterInformation : MonoBehaviour
 }
 public enum CharacterENUM
 {
-    MORT, TILDA
+    MORT, TILDA, NONE
 }
