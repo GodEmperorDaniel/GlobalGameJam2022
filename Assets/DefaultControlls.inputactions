@@ -15,7 +15,7 @@
                 },
                 {
                     "name": "Graffiti/Clean",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "2a9a9c50-337f-46e9-8f17-a700cd0ccbea",
                     "expectedControlType": "Button",
                     "processors": "",

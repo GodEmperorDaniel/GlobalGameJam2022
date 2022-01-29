@@ -20,7 +20,7 @@ public class MovementScript : MonoBehaviour
     private bool _isClimbing = false;
     private Coroutine c_jumpCooldown;
 
-    private WallDetector wallDetector;
+    WallDetector wallDetector = new WallDetector();
 
     private void Start()
     {
@@ -104,17 +104,17 @@ public class MovementScript : MonoBehaviour
         yield return new WaitForSeconds(charInfo._jumpCooldown);
         c_jumpCooldown = null;
     }
-    public void OnGraffitiClean() //might not be able to do callback context, just check information in controller scheme?
+    public void OnGraffitiClean(InputValue c) //might not be able to do callback context, just check information in controller scheme?
     {
         if (charInfo._character == CharacterENUM.MORT)
         {
             //test do clean
+            wallDetector.interactingWithWall(transform, ref c, charInfo._character);
         }
         else
         {
             //test do graffiti
-            wallDetector = new WallDetector();
-            wallDetector.interactingWithWall(this.transform);
+            wallDetector.interactingWithWall(transform, ref c, charInfo._character);
         }
     }
     public void OnPowerUp(InputAction.CallbackContext c)

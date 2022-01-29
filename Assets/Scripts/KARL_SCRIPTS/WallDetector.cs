@@ -7,29 +7,24 @@ using UnityEngine.InputSystem;
 
 public class WallDetector : MonoBehaviour
 {
-    //public LayerMask mask;
-    //public int contactDistance;
-    
-    //private void FixedUpdate()
+    //public void FixedUpdate()
     //{
-    //    interactingWithWall();
+    //    interactingWithWall(this.transform);
     //}
-    // Update is called once per frame
-
-    public void interactingWithWall(Transform tran)
+    public void interactingWithWall(Transform tran, ref InputValue c, CharacterENUM _character) //
     {
-        int contactDistance = 2;
+        int contactDistance = 100;
         int layerMask = 1 << 6;
-        layerMask = ~layerMask;
         Ray ray = new Ray(tran.position, tran.forward);
         RaycastHit hit;
 
-        Vector3 fwd = this.transform.TransformDirection(Vector3.forward);
         if (Physics.Raycast(ray, out hit, contactDistance, layerMask))
         {
             Debug.DrawLine(ray.origin, hit.point, Color.red);
-            CallGrafitti(hit);
-            print("There is something in front of the object! " + hit.collider.gameObject.name);
+            if (_character == CharacterENUM.MORT)
+                CallCleaning(hit, c);
+            else
+                CallGrafitti(hit, c);
         }
         else
         {
@@ -37,8 +32,30 @@ public class WallDetector : MonoBehaviour
         }
     }
 
-    private void CallGrafitti(RaycastHit hit)
+    private void CallGrafitti(RaycastHit hit, InputValue c)
     {
-        hit.collider.gameObject.SendMessage("startFadeIn"); 
+        Graffiting graffiting = hit.collider.gameObject.GetComponent(typeof(Graffiting)) as Graffiting;
+        if (graffiting != null)
+        {
+            graffiting.startFadeIn(c);
+            //Debug.Log("TRÄFF");
+        }
+        else
+        {
+            Debug.Log("Hittar inte graffiting");
+        }
+    }
+    private void CallCleaning(RaycastHit hit, InputValue c)
+    {
+        Graffiting graffiting = hit.collider.gameObject.GetComponent(typeof(Graffiting)) as Graffiting;
+        if (graffiting != null)
+        {
+            graffiting.startFadeOut(c);
+            //Debug.Log("TRÄFF");
+        }
+        else
+        {
+            Debug.Log("Hittar inte graffiting");
+        } 
     }
 }
