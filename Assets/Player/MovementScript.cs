@@ -5,13 +5,10 @@ using UnityEngine.InputSystem;
 
 public class MovementScript : MonoBehaviour
 {
-
-    //
-    //OBS MAKE THINGS INTO INTERFACES OR CALCULATE ALL THE MOVEMENT IN UPDATE INSTEAD, GOES HAYWIRE AS IS 
-    //
     private CharacterInformation charInfo;
     private Rigidbody rb;
     [SerializeField] private Vector3 _gravity = new Vector3(0, -5, 0);
+    [SerializeField] private float raycastOffset = 0.5f;
     private const int _MULTIPLIER = 200;
 
     private Vector3 _moveVec;
@@ -34,39 +31,56 @@ public class MovementScript : MonoBehaviour
         Vector3 newVel = Vector3.zero;
         if (_isClimbing) //climbing
         {
-            Debug.Log("we clibing");
+            //Debug.Log("we clibing");
             if (_moveVec.magnitude > 0.1f)
             {
                 newVel = new Vector3(0, charInfo._climbSpeed);
             }
         }
-        else if (!CheckIfGrounded()) //falling
+        else if (CheckIfInAir()) //falling
         {
             newVel = new Vector3(_moveVec.x, _gravity.y, _moveVec.z);
         }
         else //moving and or jumping
         {
-            //Debug.Log(_isJumping);
             newVel = new Vector3(_moveVec.x, _isJumping ? charInfo._jumpSpeed : 0, _moveVec.z);
         }
         rb.velocity = newVel * Time.fixedDeltaTime * _MULTIPLIER;
     }
-    private bool CheckIfGrounded()
+    private bool CheckIfInAir()
     {
         if (_isClimbing)
         {
             return false;
         }
-        Ray ray = new Ray(transform.position, Vector3.down);
-        Vector3 halfExtend = new Vector3(charInfo._characterHeight / 2, charInfo._characterHeight / 2, charInfo._characterHeight / 2);
-        bool didRayHit = Physics.BoxCast(transform.position, halfExtend, Vector3.down, out RaycastHit hit);
-        //bool didRayHit = Physics.Raycast(ray, out RaycastHit hit);
-        if (didRayHit && ((hit.point - transform.position)).magnitude > charInfo._characterHeight / 2) //gives wack null ref error
+        Vector3[] positions =
         {
-            return false;
+            transform.position,
+            new Vector3(transform.position.x - raycastOffset, transform.position.y, transform.position.z),
+            new Vector3(transform.position.x + raycastOffset, transform.position.y, transform.position.z),
+            new Vector3(transform.position.x, transform.position.y, transform.position.z - raycastOffset),
+            new Vector3(transform.position.x, transform.position.y, transform.position.z + raycastOffset),
+            new Vector3(transform.position.x - raycastOffset, transform.position.y, transform.position.z - raycastOffset),
+            new Vector3(transform.position.x + raycastOffset, transform.position.y, transform.position.z + raycastOffset),
+            new Vector3(transform.position.x + raycastOffset, transform.position.y, transform.position.z - raycastOffset),
+            new Vector3(transform.position.x - raycastOffset, transform.position.y, transform.position.z + raycastOffset)
+        };
+        int rayInAir = 0;
+        for (int i = 0; i < 9; i++)
+        {
+            Ray ray = new Ray(positions[i], Vector3.down);
+            bool didRayHit = Physics.Raycast(ray, out RaycastHit hit);
+            if (didRayHit && Mathf.Abs(hit.point.y - transform.position.y) > (charInfo._characterHeight) / 2)
+            {
+                //Debug.Log(Mathf.Abs(hit.point.y - transform.position.y) + " and " + (charInfo._characterHeight) / 2);
+                rayInAir++;
+            }
+            if (rayInAir == 9)
+            {
+                return true;
+            }
         }
-        Debug.Log("we hit " + hit.collider.name);
-        return true;
+        return false;
     }
     public void OnMoving(InputValue c)
     {
@@ -77,7 +91,7 @@ public class MovementScript : MonoBehaviour
 
     public void OnJumpClimb()
     {
-        if (!CheckIfGrounded())
+        if (CheckIfInAir())
         {
             return;
         }
@@ -102,7 +116,7 @@ public class MovementScript : MonoBehaviour
         _gravity = Vector3.zero;
         yield return new WaitForSeconds(charInfo._jumpDuration);
         _gravity = new Vector3(0, -5, 0);
-        while (!CheckIfGrounded())
+        while (CheckIfInAir())
         {
             yield return null;
         }
@@ -123,7 +137,20 @@ public class MovementScript : MonoBehaviour
             wallDetector.interactingWithWall(transform, ref c, charInfo._character);
         }
     }
-    public void OnPowerUp(InputAction.CallbackContext c)
+    //fast-tag amd speedy clean
+    public void OnPowerUp1()
+    {
+        if (charInfo._character == CharacterENUM.MORT)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
+    //doublejump & wallblock!
+    public void OnPowerUp2()
     {
         if (charInfo._character == CharacterENUM.MORT)
         {

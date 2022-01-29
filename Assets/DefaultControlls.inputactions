@@ -30,9 +30,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "PowerUp",
+                    "name": "PowerUp1",
                     "type": "Button",
                     "id": "26a61a25-52dd-4f5f-a61d-ee30c6e78d57",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "PowerUp2",
+                    "type": "Button",
+                    "id": "4cc8c1fd-aa40-42cd-a78b-b5477ed56a34",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -123,18 +131,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PowerUp",
+                    "action": "PowerUp1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "9414358d-54c6-4a4b-aeff-f485a7db5737",
+                    "id": "34f5dbe9-81ab-4bb0-804e-da4e65a8121b",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PowerUp",
+                    "action": "PowerUp2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

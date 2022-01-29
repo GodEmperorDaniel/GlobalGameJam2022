@@ -21,7 +21,7 @@ public class CharacterInformation : MonoBehaviour
     public float _characterHeight = 1;
 
     public EventSystem es;
-    
+
     [Header("UI information")]
     public GameObject image;
     public Sprite player1;
@@ -39,7 +39,7 @@ public class CharacterInformation : MonoBehaviour
         //TextMeshProUGUI text;
         //Sprite sp = go.GetComponent<Image>().sprite;
 
-        if(PlayerJoinAction._playerCount == 1)
+        if (PlayerJoinAction._playerCount == 1)
         {
             go.GetComponent<Image>().sprite = player1;
         }
@@ -48,32 +48,47 @@ public class CharacterInformation : MonoBehaviour
             go.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, -62, 0);
             go.GetComponent<Image>().sprite = player2;
         }
-        
+
 
         es.SetSelectedGameObject(defaultButton);
 
-        go.GetComponent<CharacterSelection>().eventSystem = es; 
+        go.GetComponent<CharacterSelection>().eventSystem = es;
     }
-    
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawLine(transform.position, (transform.position - ( new Vector3(0, _characterHeight / 2, 0))));
+        Vector3[] positions =
+{
+            transform.position,
+            new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z),
+            new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z),
+            new Vector3(transform.position.x, transform.position.y, transform.position.z - 0.5f),
+            new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.5f),
+            new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z - 0.5f),
+            new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z + 0.5f),
+            new Vector3(transform.position.x + 0.5f, transform.position.y, transform.position.z - 0.5f),
+            new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z + 0.5f)
+        };
+        for (int i = 0; i < 9; i++)
+        {
+            Gizmos.DrawLine(positions[i], (positions[i] - (new Vector3(0, _characterHeight / 2, 0))));
+        }
     }
 
     private void Awake()
     {
-        if(!players.Contains(this))
+        if (!players.Contains(this))
         {
             players.Add(this);
         }
         //_character = (CharacterENUM)PlayerJoinAction._playerCount - 1;
-        if(UIManager.UI == null)
+        if (UIManager.UI == null)
         {
             return;
         }
         defaultButton = UIManager.UI.defaulButton;
-        parent = UIManager.UI.gameObject; 
+        parent = UIManager.UI.gameObject;
         spawnPlayerImage();
     }
 }

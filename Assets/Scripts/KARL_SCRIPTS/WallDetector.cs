@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class WallDetector : MonoBehaviour
+public class WallDetector
 {
     //public void FixedUpdate()
     //{
