@@ -7,7 +7,7 @@ using TMPro;
 
 public class CharacterInformation : MonoBehaviour
 {
-    [HideInInspector] public static List<CharacterInformation> players;
+    [HideInInspector] public static List<CharacterInformation> players = new List<CharacterInformation>();
     [Header("CharacterSelection")]
     public CharacterENUM _character;
     [Header("SpeedStats")]

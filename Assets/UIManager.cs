@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public static UIManager UI;
-    public GameObject defaulButton; 
+    public GameObject defaulButton;
 
     private void Awake()
     {
@@ -15,15 +15,13 @@ public class UIManager : MonoBehaviour
     }
     public bool CheckIfBothSelectedCharacter()
     {
-        bool isGood = true;
         foreach (CharacterInformation p in CharacterInformation.players)
         {
-            if(isGood)
+            if (p.GetComponent<UIInputs>().choosenCharacter == CharacterENUM.NONE)
             {
-                
+                return false;
             }
         }
-        
         return true;
     }
 }
