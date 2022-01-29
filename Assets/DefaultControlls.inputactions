@@ -7,7 +7,7 @@
             "actions": [
                 {
                     "name": "Moving",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "f834e8a3-e216-4e8f-98a5-e1e60ecde349",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -42,7 +42,7 @@
                 {
                     "name": "ControllerJoystick",
                     "id": "2c1b7a65-5dbb-434a-8dbc-5261167c497c",
-                    "path": "2DVector",
+                    "path": "2DVector(mode=2)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
