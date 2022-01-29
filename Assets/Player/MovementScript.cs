@@ -34,7 +34,7 @@ public class MovementScript : MonoBehaviour
         Vector3 newVel = Vector3.zero;
         if (_isClimbing) //climbing
         {
-                Debug.Log("we clibing");
+            Debug.Log("we clibing");
             if (_moveVec.magnitude > 0.1f)
             {
                 newVel = new Vector3(0, charInfo._climbSpeed);
@@ -58,12 +58,14 @@ public class MovementScript : MonoBehaviour
             return false;
         }
         Ray ray = new Ray(transform.position, Vector3.down);
-        bool didRayHit =Physics.SphereCast(ray, 1, out RaycastHit hit);
+        Vector3 halfExtend = new Vector3(charInfo._characterHeight / 2, charInfo._characterHeight / 2, charInfo._characterHeight / 2);
+        bool didRayHit = Physics.BoxCast(transform.position, halfExtend, Vector3.down, out RaycastHit hit);
         //bool didRayHit = Physics.Raycast(ray, out RaycastHit hit);
         if (didRayHit && ((hit.point - transform.position)).magnitude > charInfo._characterHeight / 2) //gives wack null ref error
         {
             return false;
         }
+        Debug.Log("we hit " + hit.collider.name);
         return true;
     }
     public void OnMoving(InputValue c)
@@ -93,7 +95,7 @@ public class MovementScript : MonoBehaviour
         else
         {
             _isClimbing = false;
-        } 
+        }
     }
     private IEnumerator JumpCooldown()
     {
