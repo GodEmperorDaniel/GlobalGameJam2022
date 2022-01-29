@@ -7,11 +7,10 @@ using UnityEngine.UI;
 
 public class CharacterSelection : MonoBehaviour
 {
-    [SerializeField] private GameObject leftButton;
-    [SerializeField] private GameObject rightButton;
     private RectTransform image;
     [SerializeField] private float positionToTheLeft = -80.0f;
-    [SerializeField] private float positionToTheRight = 80.0f; 
+    [SerializeField] private float positionToTheRight = 80.0f;
+    public EventSystem eventSystem; 
 
     private void Start()
     {
@@ -22,12 +21,12 @@ public class CharacterSelection : MonoBehaviour
 
     private void Update()
     {
-        if (EventSystem.current.currentSelectedGameObject == leftButton)
+        if (eventSystem.currentSelectedGameObject.name == "LeftButton")
         {
             moveImageToLeft();
         }
         
-        if (EventSystem.current.currentSelectedGameObject == rightButton)
+        if (eventSystem.currentSelectedGameObject.name == "RightButton")
         {
             moveImageToRight();
         }
