@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class WallDetector : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public LayerMask mask;
     private void FixedUpdate()
     {
         interactingWithWall();
@@ -17,17 +13,15 @@ public class WallDetector : MonoBehaviour
 
     private void interactingWithWall()
     {
-        int layerMask = 6 << 8;
 
-        layerMask = ~layerMask;
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
-        if (Physics.Raycast(ray, out hit, 100, layerMask))
+        if (Physics.Raycast(ray, out hit, 100, mask))
         {
-            
             Debug.DrawLine(ray.origin, hit.point, Color.red);
+
             print("There is something in front of the object! " + hit.ToString());
         }
         else
