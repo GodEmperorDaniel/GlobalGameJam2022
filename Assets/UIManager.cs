@@ -25,10 +25,14 @@ public class UIManager : MonoBehaviour
             ShowContinueUI();
             ready = true;
         }
+        if(CharacterInformation.players.Count > 1)
+        {
+            PressXToselectCharacter();
+        }
     }
     private void PressXToJoinGame()
     {
-        xFor.text = "X to Join Game";
+        xFor.text = "Any Button to Join";
     }
     public void PressXToselectCharacter()
     {
@@ -38,7 +42,6 @@ public class UIManager : MonoBehaviour
     {
         xFor.text = "X to Start Game!";
     }
-
     public void StartGame()
     {
         foreach (CharacterInformation p in CharacterInformation.players)
