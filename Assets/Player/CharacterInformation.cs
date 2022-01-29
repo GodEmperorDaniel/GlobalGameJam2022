@@ -15,6 +15,7 @@ public class CharacterInformation : MonoBehaviour
     public float _jumpSpeed = 1;
     [Tooltip("If 0 can jump as fast as you hit ground")]
     public float _jumpCooldown = 0;
+    public float _jumpDuration = 0.5f;
     public float _climbSpeed = 1;
     [Tooltip("In unity units")]
     public float _characterHeight = 1;

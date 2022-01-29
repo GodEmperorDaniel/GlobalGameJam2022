@@ -11,7 +11,7 @@ public class MovementScript : MonoBehaviour
     //
     private CharacterInformation charInfo;
     private Rigidbody rb;
-    [SerializeField] private Vector3 _gravity = new Vector3(0, -1, 0);
+    [SerializeField] private Vector3 _gravity = new Vector3(0, -5, 0);
     private const int _MULTIPLIER = 200;
 
     private Vector3 _moveVec;
@@ -32,17 +32,17 @@ public class MovementScript : MonoBehaviour
     {
         if (charInfo.es.isActiveAndEnabled) return;
         Vector3 newVel = Vector3.zero;
-        if (!CheckIfGrounded()) //falling
+        if (_isClimbing) //climbing
         {
-            newVel = new Vector3(_moveVec.x, _gravity.y, _moveVec.z);
-        }
-        else if (_isClimbing) //climbing
-        {
-            if(_moveVec.magnitude > 0.1f)
+                Debug.Log("we clibing");
+            if (_moveVec.magnitude > 0.1f)
             {
-                Debug.Log("climbing");
                 newVel = new Vector3(0, charInfo._climbSpeed);
             }
+        }
+        else if (!CheckIfGrounded()) //falling
+        {
+            newVel = new Vector3(_moveVec.x, _gravity.y, _moveVec.z);
         }
         else //moving and or jumping
         {
@@ -53,9 +53,13 @@ public class MovementScript : MonoBehaviour
     }
     private bool CheckIfGrounded()
     {
-        //first check so we aint climbing!
+        if (_isClimbing)
+        {
+            return false;
+        }
         Ray ray = new Ray(transform.position, Vector3.down);
-        bool didRayHit = Physics.Raycast(ray, out RaycastHit hit);
+        bool didRayHit =Physics.SphereCast(ray, 1, out RaycastHit hit);
+        //bool didRayHit = Physics.Raycast(ray, out RaycastHit hit);
         if (didRayHit && ((hit.point - transform.position)).magnitude > charInfo._characterHeight / 2) //gives wack null ref error
         {
             return false;
@@ -76,26 +80,26 @@ public class MovementScript : MonoBehaviour
             return;
         }
         //if close to climbing area
-        if(_canClimb && !_isClimbing)
+        if (_canClimb && !_isClimbing)
         {
             _isClimbing = true;
             return;
         }
-        else
-        {
-            _isClimbing = false;
-            return;
-        }
-        //else this
-        if (c_jumpCooldown == null)
+        else if (c_jumpCooldown == null)
         {
             _isJumping = true;
             c_jumpCooldown = StartCoroutine(JumpCooldown());
         }
+        else
+        {
+            _isClimbing = false;
+        } 
     }
     private IEnumerator JumpCooldown()
     {
-        yield return new WaitForFixedUpdate();
+        _gravity = Vector3.zero;
+        yield return new WaitForSeconds(charInfo._jumpDuration);
+        _gravity = new Vector3(0, -5, 0);
         while (!CheckIfGrounded())
         {
             yield return null;
@@ -121,7 +125,7 @@ public class MovementScript : MonoBehaviour
     {
         if (charInfo._character == CharacterENUM.MORT)
         {
-            
+
         }
         else
         {
@@ -140,6 +144,7 @@ public class MovementScript : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Climbable"))
         {
             _canClimb = false;
+            _isClimbing = false;
         }
     }
 }
