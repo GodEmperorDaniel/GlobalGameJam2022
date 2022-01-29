@@ -12,24 +12,43 @@ public class MovementScript : MonoBehaviour
     private CharacterInformation charInfo;
     private Rigidbody rb;
     [SerializeField] private Vector3 _gravity = new Vector3(0, -1, 0);
-    private const int _MULTIPLIER = 1000;
+    private const int _MULTIPLIER = 200;
+
+    private Vector3 _moveVec;
+    private bool _isJumping = false;
+    private bool _canClimb = false;
+    private bool _isClimbing = false;
+    private Coroutine c_jumpCooldown;
     private void Start()
     {
         charInfo = GetComponent<CharacterInformation>();
         rb = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (!CheckIfGrounded())
+        Vector3 newVel = Vector3.zero;
+        if (!CheckIfGrounded()) //falling
         {
-            Vector3 newVel = new Vector3(rb.velocity.x, _gravity.y,rb.velocity.z);
-            rb.velocity = newVel * Time.deltaTime * _MULTIPLIER;
+            newVel = new Vector3(_moveVec.x, _gravity.y, _moveVec.z);
         }
+        else if (_isClimbing) //climbing
+        {
+            if(_moveVec.magnitude > 0.1f)
+            {
+                Debug.Log("climbing");
+                newVel = new Vector3(0, charInfo._climbSpeed);
+            }
+        }
+        else //moving and or jumping
+        {
+            //Debug.Log(_isJumping);
+            newVel = new Vector3(_moveVec.x, _isJumping ? charInfo._jumpSpeed : 0, _moveVec.z);
+        }
+        rb.velocity = newVel * Time.fixedDeltaTime * _MULTIPLIER;
     }
     private bool CheckIfGrounded()
     {
-        new WaitForFixedUpdate();
         //first check so we aint climbing!
         Ray ray = new Ray(transform.position, Vector3.down);
         bool didRayHit = Physics.Raycast(ray, out RaycastHit hit);
@@ -43,7 +62,7 @@ public class MovementScript : MonoBehaviour
     {
         Vector2 normDirection = c.Get<Vector2>().normalized;
         Vector3 direction = new Vector3(normDirection.x, 0, normDirection.y);
-        rb.velocity = direction * charInfo._movementSpeed * Time.deltaTime * _MULTIPLIER;
+        _moveVec = direction * charInfo._movementSpeed;
     }
 
     public void OnJumpClimb()
@@ -53,13 +72,35 @@ public class MovementScript : MonoBehaviour
             return;
         }
         //if close to climbing area
+        if(_canClimb && !_isClimbing)
+        {
+            _isClimbing = true;
+            return;
+        }
+        else
+        {
+            _isClimbing = false;
+            return;
+        }
         //else this
-        Debug.Log(rb.velocity);
-        Vector3 directionVector = new Vector3(rb.velocity.x, charInfo._jumpSpeed * Time.deltaTime * _MULTIPLIER, rb.velocity.z);
-        rb.velocity = directionVector;
-        Debug.Log(directionVector);
+        if (c_jumpCooldown == null)
+        {
+            _isJumping = true;
+            c_jumpCooldown = StartCoroutine(JumpCooldown());
+        }
     }
-    public void OnGraffitiClean(InputAction.CallbackContext c)
+    private IEnumerator JumpCooldown()
+    {
+        yield return new WaitForFixedUpdate();
+        while (!CheckIfGrounded())
+        {
+            yield return null;
+        }
+        _isJumping = false;
+        yield return new WaitForSeconds(charInfo._jumpCooldown);
+        c_jumpCooldown = null;
+    }
+    public void OnGraffitiClean(InputAction.CallbackContext c) //might not be able to do callback context, just check information in controller scheme?
     {
         if (charInfo._character == CharacterENUM.MORT)
         {
@@ -79,6 +120,20 @@ public class MovementScript : MonoBehaviour
         else
         {
 
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Climbable"))
+        {
+            _canClimb = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Climbable"))
+        {
+            _canClimb = false;
         }
     }
 }
