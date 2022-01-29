@@ -5,36 +5,74 @@ using UnityEngine.InputSystem;
 
 public class MovementScript : MonoBehaviour
 {
-    CharacterInformation charInfo;
+
+    //
+    //OBS MAKE THINGS INTO INTERFACES OR CALCULATE ALL THE MOVEMENT IN UPDATE INSTEAD, GOES HAYWIRE AS IS 
+    //
+    private CharacterInformation charInfo;
+    private Rigidbody rb;
+    [SerializeField] private Vector3 _gravity = new Vector3(0, -1, 0);
+    private const int _MULTIPLIER = 1000;
     private void Start()
     {
         charInfo = GetComponent<CharacterInformation>();
-    }
-    public void Movement(InputAction.CallbackContext c)
-    {
-        Vector2 tempDirection = c.ReadValue<Vector2>();
-        Vector3 direction = new Vector3(tempDirection.x, 0, tempDirection.y);
-        transform.Translate(direction * charInfo._movementSpeed);
+        rb = GetComponent<Rigidbody>();
     }
 
-    public void JumpOrClimb(InputAction.CallbackContext c)
+    private void Update()
     {
-        //check if close to a ladder first
-    }
-    public void GraffitiOrClean(InputAction.CallbackContext c)
-    {
-        if(charInfo._character == CharacterENUM.MORT)
+        if (!CheckIfGrounded())
         {
-            //do clean
+            Vector3 newVel = new Vector3(rb.velocity.x, _gravity.y,rb.velocity.z);
+            rb.velocity = newVel * Time.deltaTime * _MULTIPLIER;
+        }
+    }
+    private bool CheckIfGrounded()
+    {
+        new WaitForFixedUpdate();
+        //first check so we aint climbing!
+        Ray ray = new Ray(transform.position, Vector3.down);
+        bool didRayHit = Physics.Raycast(ray, out RaycastHit hit);
+        if (didRayHit && ((hit.point - transform.position)).magnitude > charInfo._characterHeight / 2) //gives wack null ref error
+        {
+            return false;
+        }
+        return true;
+    }
+    public void OnMoving(InputValue c)
+    {
+        Vector2 normDirection = c.Get<Vector2>().normalized;
+        Vector3 direction = new Vector3(normDirection.x, 0, normDirection.y);
+        rb.velocity = direction * charInfo._movementSpeed * Time.deltaTime * _MULTIPLIER;
+    }
+
+    public void OnJumpClimb()
+    {
+        if (!CheckIfGrounded())
+        {
+            return;
+        }
+        //if close to climbing area
+        //else this
+        Debug.Log(rb.velocity);
+        Vector3 directionVector = new Vector3(rb.velocity.x, charInfo._jumpSpeed * Time.deltaTime * _MULTIPLIER, rb.velocity.z);
+        rb.velocity = directionVector;
+        Debug.Log(directionVector);
+    }
+    public void OnGraffitiClean(InputAction.CallbackContext c)
+    {
+        if (charInfo._character == CharacterENUM.MORT)
+        {
+            //test do clean
         }
         else
         {
-            //do graffiti
+            //test do graffiti
         }
     }
-    public void TriggerPowerUp(InputAction.CallbackContext c)
+    public void OnPowerUp(InputAction.CallbackContext c)
     {
-        if(charInfo._character == CharacterENUM.MORT)
+        if (charInfo._character == CharacterENUM.MORT)
         {
 
         }
