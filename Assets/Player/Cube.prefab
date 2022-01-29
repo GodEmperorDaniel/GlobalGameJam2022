@@ -134,7 +134,9 @@ MonoBehaviour:
   _climbSpeed: 4
   _characterHeight: 1
   es: {fileID: 771064730}
-  image: {fileID: 2338716804644593625, guid: 40990b00eb0c90e43ac23628bf220046, type: 3}
+  image: {fileID: 4738711015534054670, guid: 247dc0a49942a454fb4167b48dcf46b4, type: 3}
+  player1: {fileID: 21300000, guid: 72d3aad119fb6354ba6044856a34f4e7, type: 3}
+  player2: {fileID: 21300000, guid: 32ced875248a9974cb138a10eede1819, type: 3}
   parent: {fileID: 0}
   defaultButton: {fileID: 0}
   tilda: {fileID: 0}
