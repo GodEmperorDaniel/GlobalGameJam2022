@@ -7,23 +7,25 @@ using UnityEngine.InputSystem;
 
 public class WallDetector : MonoBehaviour
 {
-    public LayerMask mask;
-    public int contactDistance;
+    //public LayerMask mask;
+    //public int contactDistance;
     
-    private void FixedUpdate()
-    {
-        interactingWithWall();
-    }
+    //private void FixedUpdate()
+    //{
+    //    interactingWithWall();
+    //}
     // Update is called once per frame
 
-    private void interactingWithWall()
+    public void interactingWithWall(Transform tran)
     {
-
-        Ray ray = new Ray(transform.position, transform.forward);
+        int contactDistance = 2;
+        int layerMask = 1 << 6;
+        layerMask = ~layerMask;
+        Ray ray = new Ray(tran.position, tran.forward);
         RaycastHit hit;
 
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
-        if (Physics.Raycast(ray, out hit, contactDistance, mask))
+        Vector3 fwd = this.transform.TransformDirection(Vector3.forward);
+        if (Physics.Raycast(ray, out hit, contactDistance, layerMask))
         {
             Debug.DrawLine(ray.origin, hit.point, Color.red);
             CallGrafitti(hit);
@@ -37,10 +39,6 @@ public class WallDetector : MonoBehaviour
 
     private void CallGrafitti(RaycastHit hit)
     {
-        if (Input.GetKey("a"))
-        {
-            hit.collider.gameObject.SendMessage("startFadeIn");
-        }
-        
+        hit.collider.gameObject.SendMessage("startFadeIn"); 
     }
 }
