@@ -36,12 +36,13 @@ public class MovementScript : MonoBehaviour
         {
             if(_moveVec.magnitude > 0.1f)
             {
-
+                Debug.Log("climbing");
+                newVel = new Vector3(0, charInfo._climbSpeed);
             }
         }
         else //moving and or jumping
         {
-            Debug.Log(_isJumping);
+            //Debug.Log(_isJumping);
             newVel = new Vector3(_moveVec.x, _isJumping ? charInfo._jumpSpeed : 0, _moveVec.z);
         }
         rb.velocity = newVel * Time.fixedDeltaTime * _MULTIPLIER;
