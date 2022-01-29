@@ -5,31 +5,41 @@ using UnityEngine;
 
 public class percentageGraffiti : MonoBehaviour
 {
-    public List<GameObject> WallsForGraffiti;
+    public List<Graffiting> WallsForGraffiti;
     private int numberOfWallsWithGraffiti;
-    public HealthBarScript healthBar; 
+    public HealthBarScript healthBar;
 
+    private void Start()
+    {
+        //checkPercentage();
+    }
     private void Update()
     {
-        checkPercentage();
-        calculatePercentage();
+        Debug.Log(checkPercentage());
+        calculatePercentage(checkPercentage());
     }
 
     private int checkPercentage()
     {
         numberOfWallsWithGraffiti = 0;
-        foreach (GameObject graffitiWall in WallsForGraffiti)
+        foreach (Graffiting graffitiWall in WallsForGraffiti)
         {
+            
             // if graffitiWall.painted is true 
-            numberOfWallsWithGraffiti++; 
+            if (!graffitiWall.isCleaned)
+            {
+                numberOfWallsWithGraffiti++;
+            }
+
         }
 
         return numberOfWallsWithGraffiti;
     }
 
-    private void calculatePercentage()
+    private void calculatePercentage(int graffitiWall)
     {
-        int percentage = WallsForGraffiti.Count/numberOfWallsWithGraffiti;
-        healthBar.SetHealth(percentage);
+        //float percentage = WallsForGraffiti.Count/ graffitiWall;
+        healthBar.SetMaxhealth(WallsForGraffiti.Count);
+        healthBar.SetHealth(graffitiWall);
     }
 }
