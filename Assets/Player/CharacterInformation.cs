@@ -9,7 +9,7 @@ public class CharacterInformation : MonoBehaviour
 {
     [HideInInspector] public static List<CharacterInformation> players = new List<CharacterInformation>();
     [Header("CharacterSelection")]
-    public CharacterENUM _character;
+    public CharacterENUM _character = CharacterENUM.NONE;
     [Header("SpeedStats")]
     public float _movementSpeed = 1;
     public float _jumpSpeed = 1;
@@ -64,7 +64,7 @@ public class CharacterInformation : MonoBehaviour
         {
             players.Add(this);
         }
-        _character = (CharacterENUM)PlayerJoinAction._playerCount - 1;
+        //_character = (CharacterENUM)PlayerJoinAction._playerCount - 1;
         if(UIManager.UI == null)
         {
             return;

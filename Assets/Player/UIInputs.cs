@@ -11,8 +11,17 @@ public class UIInputs : MonoBehaviour
     {
         charInfo = GetComponent<CharacterInformation>();
     }
-    public void OnMoving()
+    public void OnUIMoving()
     {
+        if(CharacterInformation.players.Count <= 1)
+        {
+            charInfo.es.gameObject.SetActive(false);
+            return;
+        }
+        else
+        {
+            charInfo.es.gameObject.SetActive(true);
+        }
         if (charInfo.es.IsActive())
         {
             ActivateMyEventSystem();
@@ -26,13 +35,37 @@ public class UIInputs : MonoBehaviour
         }
         if (GoodSelections())
         {
-            if (charInfo.es.currentSelectedGameObject.name == "RightButton")
+            if (charInfo.es.currentSelectedGameObject.name == "RightButton" && choosenCharacter != CharacterENUM.MORT)
             {
                 choosenCharacter = CharacterENUM.MORT;
+                return;
             }
-            else if(charInfo.es.currentSelectedGameObject.name == "LeftButton")
+            else if(charInfo.es.currentSelectedGameObject.name == "LeftButton" && choosenCharacter != CharacterENUM.TILDA)
             {
                 choosenCharacter = CharacterENUM.TILDA;
+                return;
+            }
+            else
+            {
+                UIManager.UI.StartGame();
+                foreach (CharacterInformation p in CharacterInformation.players)
+                {
+                    if (p == charInfo)
+                    {
+                        p._character = choosenCharacter;
+                    }
+                    else
+                    {
+                        if(choosenCharacter == CharacterENUM.MORT)
+                        {
+                            p._character = CharacterENUM.TILDA;
+                        }
+                        else
+                        {
+                            p._character = CharacterENUM.MORT;
+                        }
+                    }
+                }
             }
         }
     }
@@ -50,8 +83,6 @@ public class UIInputs : MonoBehaviour
     }
     public void ActivateMyEventSystem()
     {
-        EventSystem current = EventSystem.current;
         EventSystem.current = charInfo.es;
-        //change back?
     }
 }

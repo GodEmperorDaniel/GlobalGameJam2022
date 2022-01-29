@@ -121,7 +121,7 @@ public class MovementScript : MonoBehaviour
     {
         if (charInfo._character == CharacterENUM.MORT)
         {
-
+            
         }
         else
         {

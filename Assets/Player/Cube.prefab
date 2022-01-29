@@ -308,7 +308,7 @@ MonoBehaviour:
     m_ActionName: Character /PowerUp[/XInputControllerWindows/leftTrigger,/XInputControllerWindows/rightTrigger]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Controller
-  m_DefaultActionMap: e395e0db-b775-4bd6-a259-5ee0ba7a82d7
+  m_DefaultActionMap: UIInput
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &-840821557785427707
@@ -366,3 +366,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115313b24ee13a24fafcd23a6f146d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  choosenCharacter: 2
