@@ -15,10 +15,7 @@ public class CharacterSelection : MonoBehaviour
     private void Start()
     {
         image = GetComponent<RectTransform>();
-
     }
-
-
     private void Update()
     {
         if (eventSystem.currentSelectedGameObject.name == "LeftButton")
@@ -31,12 +28,10 @@ public class CharacterSelection : MonoBehaviour
             moveImageToRight();
         }
     }
-
     private void moveImageToLeft()
     {
         image.anchoredPosition = new Vector2(positionToTheLeft, image.anchoredPosition.y);
     }
-    
     private void moveImageToRight()
     {
         image.anchoredPosition = new Vector2(positionToTheRight, image.anchoredPosition.y);
