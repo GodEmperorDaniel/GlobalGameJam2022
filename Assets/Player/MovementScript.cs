@@ -19,6 +19,9 @@ public class MovementScript : MonoBehaviour
     private bool _canClimb = false;
     private bool _isClimbing = false;
     private Coroutine c_jumpCooldown;
+
+    private WallDetector wallDetector;
+
     private void Start()
     {
         charInfo = GetComponent<CharacterInformation>();
@@ -27,6 +30,7 @@ public class MovementScript : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (charInfo.es.isActiveAndEnabled) return;
         Vector3 newVel = Vector3.zero;
         if (!CheckIfGrounded()) //falling
         {
@@ -100,7 +104,7 @@ public class MovementScript : MonoBehaviour
         yield return new WaitForSeconds(charInfo._jumpCooldown);
         c_jumpCooldown = null;
     }
-    public void OnGraffitiClean(InputAction.CallbackContext c) //might not be able to do callback context, just check information in controller scheme?
+    public void OnGraffitiClean() //might not be able to do callback context, just check information in controller scheme?
     {
         if (charInfo._character == CharacterENUM.MORT)
         {
@@ -109,6 +113,8 @@ public class MovementScript : MonoBehaviour
         else
         {
             //test do graffiti
+            wallDetector = new WallDetector();
+            wallDetector.interactingWithWall(this.transform);
         }
     }
     public void OnPowerUp(InputAction.CallbackContext c)
