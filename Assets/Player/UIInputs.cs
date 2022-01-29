@@ -33,7 +33,7 @@ public class UIInputs : MonoBehaviour
         {
             ActivateMyEventSystem();
         }
-        if (GoodSelections())
+        if (GoodSelections() && UIManager.UI.gameObject.activeInHierarchy)
         {
             if (charInfo.es.currentSelectedGameObject.name == "RightButton" && choosenCharacter != CharacterENUM.MORT)
             {
