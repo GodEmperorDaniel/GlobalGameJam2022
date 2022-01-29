@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2124383234407304625}
   - component: {fileID: 7024563974438684065}
   - component: {fileID: -840821557785427707}
+  - component: {fileID: 2882227074274052237}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -52,6 +53,7 @@ MonoBehaviour:
   _character: 0
   _movementSpeed: 6
   _jumpSpeed: 16
+  _jumpCooldown: 0
   _climbSpeed: 4
   _characterHeight: 1
 --- !u!33 &5359354500060754591
@@ -239,3 +241,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gravity: {x: 0, y: -1, z: 0}
+--- !u!114 &2882227074274052237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3256298911763180373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 2
+  outlineColor: {r: 0, g: 0, b: 0, a: 1}
+  outlineWidth: 1
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
