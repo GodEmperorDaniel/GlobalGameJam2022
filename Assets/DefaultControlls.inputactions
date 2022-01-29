@@ -145,7 +145,7 @@
             "id": "e395e0db-b775-4bd6-a259-5ee0ba7a82d7",
             "actions": [
                 {
-                    "name": "Moving",
+                    "name": "UIMoving",
                     "type": "Value",
                     "id": "13ba86ba-c755-43b6-9a7e-cf94b91c6764",
                     "expectedControlType": "Vector2",
@@ -169,7 +169,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "Moving",
+                    "action": "UIMoving",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -180,7 +180,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "Moving",
+                    "action": "UIMoving",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -191,7 +191,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "Moving",
+                    "action": "UIMoving",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -202,7 +202,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "Moving",
+                    "action": "UIMoving",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -213,7 +213,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "Moving",
+                    "action": "UIMoving",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
