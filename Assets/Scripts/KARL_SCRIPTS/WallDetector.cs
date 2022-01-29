@@ -1,10 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 
 public class WallDetector : MonoBehaviour
 {
     public LayerMask mask;
+    public int contactDistance;
+    
     private void FixedUpdate()
     {
         interactingWithWall();
@@ -18,20 +23,24 @@ public class WallDetector : MonoBehaviour
         RaycastHit hit;
 
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
-        if (Physics.Raycast(ray, out hit, 100, mask))
+        if (Physics.Raycast(ray, out hit, contactDistance, mask))
         {
             Debug.DrawLine(ray.origin, hit.point, Color.red);
-
-            print("There is something in front of the object! " + hit.ToString());
+            CallGrafitti(hit);
+            print("There is something in front of the object! " + hit.collider.gameObject.name);
         }
         else
         {
             Debug.DrawLine(ray.origin, ray.origin + ray.direction * 100, Color.green);
         }
-        
-
-
     }
-    
 
+    private void CallGrafitti(RaycastHit hit)
+    {
+        if (Input.GetKey("a"))
+        {
+            hit.collider.gameObject.SendMessage("startFadeIn");
+        }
+        
+    }
 }
