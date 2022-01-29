@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class CharacterInformation : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class CharacterInformation : MonoBehaviour
 
     public EventSystem es;
     
+    [Header("UI information")]
     public GameObject image;
     public GameObject parent;
     public GameObject defaultButton;
@@ -29,7 +31,19 @@ public class CharacterInformation : MonoBehaviour
     {
         GameObject go;
         go = Instantiate(image, parent.transform);
-        Debug.Log("Set player to cotroller");
+        TextMeshProUGUI text;
+        text = go.GetComponentInChildren<TextMeshProUGUI>();
+
+        if(PlayerJoinAction._playerCount == 1)
+        {
+            text.text = "Player 1";
+        }
+        else
+        {
+            go.GetComponent<RectTransform>().anchoredPosition = new Vector3(14, -62, 0);
+            text.text = "Player 2";
+        }
+        
 
         es.SetSelectedGameObject(defaultButton);
 
@@ -44,6 +58,7 @@ public class CharacterInformation : MonoBehaviour
 
     private void Awake()
     {
+        _character = (CharacterENUM)PlayerJoinAction._playerCount - 1;
         defaultButton = UIManager.UI.defaulButton;
         parent = UIManager.UI.gameObject; 
         spawnPlayerImage();

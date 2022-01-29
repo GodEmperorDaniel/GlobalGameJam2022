@@ -6,5 +6,10 @@ using UnityEngine.UI;
 
 public class PlayerJoinAction : MonoBehaviour
 {
-
+    public static int _playerCount = 0;
+    
+    public void AddPlayerCount()
+    {
+        _playerCount++;
+    }
 }
