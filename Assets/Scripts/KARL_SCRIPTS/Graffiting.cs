@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 public class Graffiting : MonoBehaviour
 {
     [SerializeField] private Renderer myModel;
+
+    [Range(0,1)]
     [SerializeField] private float waitTime;
     //private Color color;
 
@@ -22,7 +24,6 @@ public class Graffiting : MonoBehaviour
             color.a = 1;
 
         myModel.material.color = color;
-        //StartCoroutine(FadeInMaterial(waitTime));
     }
 
     private void Update()
@@ -38,38 +39,34 @@ public class Graffiting : MonoBehaviour
 
     public void startFadeIn(UnityEngine.InputSystem.InputValue c)
     {
-        StartCoroutine(FadeInMaterial(waitTime, c));
+        FadeInMaterial(waitTime, c);
     }
-    private IEnumerator FadeInMaterial(float waitTime, UnityEngine.InputSystem.InputValue c)
+    private void FadeInMaterial(float waitTime, UnityEngine.InputSystem.InputValue c)
     {
-        //Debug.Log("Innan " + c.isPressed);
-        while (myModel.material.color.a <= 1 && c.isPressed)
+        if (myModel.material.color.a <= 1 && c.isPressed)
         {
             Color color = myModel.material.color;
-            float fadeAmount = color.a + (waitTime * Time.deltaTime);
-            //Debug.Log(fadeAmount + " I");
+            float fadeAmount = color.a + waitTime;
             color = new Color(color.r, color.g, color.b, fadeAmount);
             myModel.material.color = color;
-            yield return null;
         }
-        //Debug.Log("Efter " + c.isPressed);
+
+        
     }
     
     public void startFadeOut(UnityEngine.InputSystem.InputValue c)
     {
-        StartCoroutine(FadeOutMaterial(waitTime, c));
+        FadeOutMaterial(waitTime, c);
     }
 
-    private IEnumerator FadeOutMaterial(float waitTime, UnityEngine.InputSystem.InputValue c)
+    private void FadeOutMaterial(float waitTime, UnityEngine.InputSystem.InputValue c)
     {
-        while (myModel.material.color.a >= 0 && c.isPressed)
+        if (myModel.material.color.a >= 0 && c.isPressed)
         {
             Color color = myModel.material.color;
-            float fadeAmount = color.a - (waitTime * Time.deltaTime);
-            Debug.Log(fadeAmount + " Efter");
+            float fadeAmount = color.a - waitTime;
             color = new Color(color.r, color.g, color.b, fadeAmount);
             myModel.material.color = color;
-            yield return null;
         }
     }
 }
