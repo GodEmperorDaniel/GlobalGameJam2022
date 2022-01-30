@@ -13,7 +13,7 @@ public class WallDetector
     //}
     public void interactingWithWall(Transform tran, ref InputValue c, CharacterENUM _character) //
     {
-        int contactDistance = 100;
+        int contactDistance = 2;
         int layerMask = 1 << 6;
         Ray ray = new Ray(tran.position, tran.forward);
         RaycastHit hit;

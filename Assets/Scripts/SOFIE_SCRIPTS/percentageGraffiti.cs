@@ -11,7 +11,8 @@ public class percentageGraffiti : MonoBehaviour
 
     private void Start()
     {
-        //checkPercentage();
+        
+        
     }
     private void Update()
     {
