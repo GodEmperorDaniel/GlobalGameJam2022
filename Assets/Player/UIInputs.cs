@@ -49,7 +49,6 @@ public class UIInputs : MonoBehaviour
             }
             else
             {
-                UIManager.UI.StartGame();
                 dialogueIsRunning = true;
                 foreach (CharacterInformation p in CharacterInformation.players)
                 {
@@ -69,6 +68,7 @@ public class UIInputs : MonoBehaviour
                         }
                     }
                 }
+                UIManager.UI.StartGame();
             }
         }
         else if(dialogueIsRunning)//&& UIManager.UI.gameObject.activeInHierarchy)

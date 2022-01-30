@@ -72,9 +72,17 @@ public class UIManager : MonoBehaviour
         foreach (CharacterInformation p in CharacterInformation.players)
         {
             p.es.gameObject.SetActive(false);
-            p.GetComponent<PlayerInput>().SwitchCurrentActionMap("CharacterInput"); 
+            Debug.Log(p._character);
+            p.transform.position = p._character == CharacterENUM.MORT ? SpawnPoint.spawn.mort.transform.position : SpawnPoint.spawn.tilda.transform.position;
         }
         characterSelectObject.SetActive(false);
+    }
+    public void ChangeActionMap()
+    {
+        foreach (CharacterInformation p in CharacterInformation.players)
+        {
+            p.GetComponent<PlayerInput>().SwitchCurrentActionMap("CharacterInput");
+        }
     }
     public void SetPowerUpImage(Image i, bool haveIt)
     {

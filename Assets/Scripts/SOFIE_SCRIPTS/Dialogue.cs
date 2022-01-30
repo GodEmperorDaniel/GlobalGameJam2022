@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
 
 public class Dialogue : MonoBehaviour
@@ -59,7 +58,12 @@ public class Dialogue : MonoBehaviour
             textComponent.text = string.Empty;
             StartCoroutine(TypeDialogue());
         }
-        else gameObject.SetActive(false); 
+        else
+        {
+            UIManager.UI.ChangeActionMap();
+            transform.parent.gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+        }
     }
 
     public void ButtonForDialoguePressed()
@@ -78,6 +82,7 @@ public class Dialogue : MonoBehaviour
     public void OnSkipDialogue()
     {
         //players can move again here
+        UIManager.UI.ChangeActionMap();
         transform.parent.gameObject.SetActive(false);
     }
     

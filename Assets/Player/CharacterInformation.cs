@@ -77,6 +77,7 @@ public class CharacterInformation : MonoBehaviour
 
     private void Awake()
     {
+        transform.position = new Vector3(0, UnityEngine.Random.Range(2f,20f));
         if (!players.Contains(this))
         {
             players.Add(this);
