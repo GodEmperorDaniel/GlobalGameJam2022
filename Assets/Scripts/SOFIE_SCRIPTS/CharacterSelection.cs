@@ -10,11 +10,12 @@ public class CharacterSelection : MonoBehaviour
     private RectTransform image;
     [SerializeField] private float positionToTheLeft = -80.0f;
     [SerializeField] private float positionToTheRight = 80.0f;
-    public EventSystem eventSystem; 
+    public EventSystem eventSystem;
 
     private void Start()
     {
         image = GetComponent<RectTransform>();
+        
     }
     private void Update()
     {
@@ -36,4 +37,6 @@ public class CharacterSelection : MonoBehaviour
     {
         image.anchoredPosition = new Vector2(positionToTheRight, image.anchoredPosition.y);
     }
+
+
 }

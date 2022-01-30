@@ -10,7 +10,7 @@ public class CharacterInformation : MonoBehaviour
     [HideInInspector] public static List<CharacterInformation> players = new List<CharacterInformation>();
     [Header("CharacterSelection")]
     public CharacterENUM _character = CharacterENUM.NONE;
-    [Header("SpeedStats")]
+    [Header("CharacterStats")]
     public float _movementSpeed = 1;
     public float _jumpSpeed = 1;
     [Tooltip("If 0 can jump as fast as you hit ground")]
@@ -19,6 +19,7 @@ public class CharacterInformation : MonoBehaviour
     public float _climbSpeed = 1;
     [Tooltip("In unity units")]
     public float _characterHeight = 1;
+    public float _cleanOrGraffitiMultiplier = 1;
 
     public EventSystem es;
 
@@ -36,8 +37,6 @@ public class CharacterInformation : MonoBehaviour
     {
         GameObject go;
         go = Instantiate(image, parent.transform);
-        //TextMeshProUGUI text;
-        //Sprite sp = go.GetComponent<Image>().sprite;
 
         if (PlayerJoinAction._playerCount == 1)
         {
@@ -88,7 +87,7 @@ public class CharacterInformation : MonoBehaviour
             return;
         }
         defaultButton = UIManager.UI.defaulButton;
-        parent = UIManager.UI.gameObject;
+        parent = UIManager.UI.characterSelectObject;
         spawnPlayerImage();
     }
 }

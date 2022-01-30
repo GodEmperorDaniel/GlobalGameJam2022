@@ -8,17 +8,39 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Character Select Things")]
+    public GameObject characterSelectObject;
     public static UIManager UI;
-    public GameObject defaulButton;
-    public TextMeshProUGUI xFor;
-    [HideInInspector] public bool ready;
     public Dialogue TildaBubble;
     public Dialogue MortBubble;
+    public Image TildaPicture;
+    public Image MortPicture;
+    public GameObject textForInformation;
+    
+    private Sprite TildaFacts;
+    private Sprite MortFacts;
+    private Sprite TildaPortrait;
+    private Sprite MortPortrait;
 
+    public GameObject defaulButton;
+    public TextMeshProUGUI xFor;
+    [Header("PowerUp Things")]
+    [SerializeField] private Color grayTintColour;
+    public Image tildaImage1;
+    public Image tildaImage2;
+    public Image mortImage1;
+    public Image mortImage2;
+    [HideInInspector] public bool ready; 
 
     private void Awake()
     {
         UI = this;
+        //sprites to change between
+        TildaPortrait = Resources.Load<Sprite>("TildaCharacterCard");
+        MortPortrait = Resources.Load<Sprite>("MortCharacterCard");
+        TildaFacts = Resources.Load<Sprite>("TildaCardBack");
+        MortFacts = Resources.Load<Sprite>("MortCardBack");
+        
         PressXToJoinGame();
     }
     private void Update()
@@ -52,8 +74,18 @@ public class UIManager : MonoBehaviour
             p.es.gameObject.SetActive(false);
             p.GetComponent<PlayerInput>().SwitchCurrentActionMap("CharacterInput"); 
         }
-        
-        gameObject.SetActive(false);
+        characterSelectObject.SetActive(false);
+    }
+    public void SetPowerUpImage(Image i, bool haveIt)
+    {
+        if(!haveIt)
+        {
+            i.color = grayTintColour;
+        }
+        else
+        {
+            i.color = Color.white;
+        }
     }
     public bool CheckIfBothSelectedCharacter()
     {
@@ -69,5 +101,30 @@ public class UIManager : MonoBehaviour
             }
         }
         return true;
+    }
+    
+    public void FlipThePictureTilda()
+    {
+        if (TildaPicture.sprite == TildaFacts)
+        {
+            TildaPicture.sprite = TildaPortrait;
+        }
+        else
+        {
+            TildaPicture.sprite = TildaFacts; 
+
+        }
+    }
+
+    public void FlipThePictureMort()
+    {
+        if (MortPicture.sprite == MortFacts)
+        {
+            MortPicture.sprite = MortPortrait;
+        }
+        else
+        {
+            MortPicture.sprite = MortFacts; 
+        }
     }
 }

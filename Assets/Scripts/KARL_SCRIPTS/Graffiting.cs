@@ -37,16 +37,16 @@ public class Graffiting : MonoBehaviour
 
     public bool getIsCleaned { get { return isCleaned; } }
 
-    public void startFadeIn(UnityEngine.InputSystem.InputValue c)
+    public void startFadeIn(UnityEngine.InputSystem.InputValue c, CharacterInformation charInfo)
     {
-        FadeInMaterial(waitTime, c);
+        FadeInMaterial(waitTime, c, charInfo);
     }
-    private void FadeInMaterial(float waitTime, UnityEngine.InputSystem.InputValue c)
+    private void FadeInMaterial(float waitTime, UnityEngine.InputSystem.InputValue c, CharacterInformation charInfo)
     {
         if (myModel.material.color.a <= 1 && c.isPressed)
         {
             Color color = myModel.material.color;
-            float fadeAmount = color.a + waitTime;
+            float fadeAmount = color.a + (waitTime * charInfo._cleanOrGraffitiMultiplier);
             color = new Color(color.r, color.g, color.b, fadeAmount);
             myModel.material.color = color;
         }
@@ -54,17 +54,17 @@ public class Graffiting : MonoBehaviour
         
     }
     
-    public void startFadeOut(UnityEngine.InputSystem.InputValue c)
+    public void startFadeOut(UnityEngine.InputSystem.InputValue c, CharacterInformation charInfo)
     {
-        FadeOutMaterial(waitTime, c);
+        FadeOutMaterial(waitTime, c, charInfo);
     }
 
-    private void FadeOutMaterial(float waitTime, UnityEngine.InputSystem.InputValue c)
+    private void FadeOutMaterial(float waitTime, UnityEngine.InputSystem.InputValue c, CharacterInformation charInfo)
     {
         if (myModel.material.color.a >= 0 && c.isPressed)
         {
             Color color = myModel.material.color;
-            float fadeAmount = color.a - waitTime;
+            float fadeAmount = color.a - (waitTime * charInfo._cleanOrGraffitiMultiplier);
             color = new Color(color.r, color.g, color.b, fadeAmount);
             myModel.material.color = color;
         }

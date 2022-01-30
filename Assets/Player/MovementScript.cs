@@ -17,6 +17,12 @@ public class MovementScript : MonoBehaviour
     private bool _isClimbing = false;
     private Coroutine c_jumpCooldown;
 
+    [Header("PowerUp Things")]
+    public bool PowerUp1;
+    public bool PowerUp2;
+    [SerializeField] private float _doubleJumpTime = 10;
+    [SerializeField] private float _cleanAndGraffitiBuffTime = 10;
+
     WallDetector wallDetector = new WallDetector();
 
     private void Start()
@@ -31,7 +37,6 @@ public class MovementScript : MonoBehaviour
         Vector3 newVel = Vector3.zero;
         if (_isClimbing) //climbing
         {
-            //Debug.Log("we clibing");
             if (_moveVec.magnitude > 0.1f)
             {
                 newVel = new Vector3(0, charInfo._climbSpeed);
@@ -111,7 +116,7 @@ public class MovementScript : MonoBehaviour
             _isClimbing = false;
         }
     }
-    private IEnumerator JumpCooldown()
+    private IEnumerator JumpCooldown() //if doublejump we gotta 
     {
         _gravity = Vector3.zero;
         yield return new WaitForSeconds(charInfo._jumpDuration);
@@ -124,41 +129,62 @@ public class MovementScript : MonoBehaviour
         yield return new WaitForSeconds(charInfo._jumpCooldown);
         c_jumpCooldown = null;
     }
+    private IEnumerator DoubleJumpActive()
+    {
+        charInfo._jumpSpeed *= 2.5f;
+        yield return new WaitForSeconds(_doubleJumpTime);
+        charInfo._jumpSpeed /= 2.5f;
+    }
     public void OnGraffitiClean(InputValue c) //might not be able to do callback context, just check information in controller scheme?
     {
         if (charInfo._character == CharacterENUM.MORT)
         {
             //test do clean
-            wallDetector.interactingWithWall(transform, ref c, charInfo._character);
+            wallDetector.interactingWithWall(transform, ref c, charInfo);
         }
         else
         {
             //test do graffiti
-            wallDetector.interactingWithWall(transform, ref c, charInfo._character);
+            wallDetector.interactingWithWall(transform, ref c, charInfo);
         }
+    }
+    private IEnumerator CleanOrGraffitiMulti()
+    {
+        charInfo._cleanOrGraffitiMultiplier *= 2;
+        yield return new WaitForSeconds(_cleanAndGraffitiBuffTime);
+        charInfo._cleanOrGraffitiMultiplier /= 2;
     }
     //fast-tag amd speedy clean
     public void OnPowerUp1()
     {
-        if (charInfo._character == CharacterENUM.MORT)
+        if (PowerUp1)
         {
-
-        }
-        else
-        {
-
+            if (charInfo._character == CharacterENUM.MORT)
+            {
+                StartCoroutine(CleanOrGraffitiMulti());
+            }
+            else
+            {
+                StartCoroutine(CleanOrGraffitiMulti());
+            }
         }
     }
-    //doublejump & wallblock!
+    //doublejump & no tag!
     public void OnPowerUp2()
     {
-        if (charInfo._character == CharacterENUM.MORT)
+        if (PowerUp2)
         {
+            if (charInfo._character == CharacterENUM.MORT)
+            {
 
-        }
-        else
-        {
-
+            }
+            else
+            {
+                Debug.Log("PowerUP used");
+                UIManager.UI.SetPowerUpImage(UIManager.UI.tildaImage2, false);
+                PowerUp2 = false;
+                StartCoroutine(DoubleJumpActive());
+            }
         }
     }
     private void OnTriggerEnter(Collider other)

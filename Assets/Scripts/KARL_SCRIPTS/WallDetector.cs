@@ -11,7 +11,7 @@ public class WallDetector
     //{
     //    interactingWithWall(this.transform);
     //}
-    public void interactingWithWall(Transform tran, ref InputValue c, CharacterENUM _character) //
+    public void interactingWithWall(Transform tran, ref InputValue c, CharacterInformation charInfo) //
     {
         int contactDistance = 2;
         int layerMask = 1 << 6;
@@ -21,10 +21,14 @@ public class WallDetector
         if (Physics.Raycast(ray, out hit, contactDistance, layerMask))
         {
             Debug.DrawLine(ray.origin, hit.point, Color.red);
-            if (_character == CharacterENUM.MORT)
-                CallCleaning(hit, c);
+            if (charInfo._character == CharacterENUM.MORT)
+            {
+                CallCleaning(hit, c, charInfo);
+            }
             else
-                CallGrafitti(hit, c);
+            {
+                CallGrafitti(hit, c, charInfo);
+            }
         }
         else
         {
@@ -32,12 +36,12 @@ public class WallDetector
         }
     }
 
-    private void CallGrafitti(RaycastHit hit, InputValue c)
+    private void CallGrafitti(RaycastHit hit, InputValue c, CharacterInformation charInfo)
     {
         Graffiting graffiting = hit.collider.gameObject.GetComponent(typeof(Graffiting)) as Graffiting;
         if (graffiting != null)
         {
-            graffiting.startFadeIn(c);
+            graffiting.startFadeIn(c, charInfo);
             //Debug.Log("TRÄFF");
         }
         else
@@ -45,12 +49,12 @@ public class WallDetector
             Debug.Log("Hittar inte graffiting");
         }
     }
-    private void CallCleaning(RaycastHit hit, InputValue c)
+    private void CallCleaning(RaycastHit hit, InputValue c, CharacterInformation charInfo)
     {
         Graffiting graffiting = hit.collider.gameObject.GetComponent(typeof(Graffiting)) as Graffiting;
         if (graffiting != null)
         {
-            graffiting.startFadeOut(c);
+            graffiting.startFadeOut(c, charInfo);
             //Debug.Log("TRÄFF");
         }
         else

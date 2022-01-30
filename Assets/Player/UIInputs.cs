@@ -71,9 +71,7 @@ public class UIInputs : MonoBehaviour
                 }
             }
         }
-        
-
-        else if(dialogueIsRunning )//&& UIManager.UI.gameObject.activeInHierarchy)
+        else if(dialogueIsRunning)//&& UIManager.UI.gameObject.activeInHierarchy)
         {
             if (choosenCharacter == CharacterENUM.MORT)
             {
@@ -113,5 +111,17 @@ public class UIInputs : MonoBehaviour
             UIManager.UI.TildaBubble.OnSkipDialogue();
         }
            
+    }
+
+    public void OnFlipTheCard()
+    {
+        if (charInfo.es.currentSelectedGameObject.name == "RightButton")
+        {
+            UIManager.UI.FlipThePictureMort();
+        }
+        else if (charInfo.es.currentSelectedGameObject.name == "LeftButton")
+        {
+            UIManager.UI.FlipThePictureTilda();
+        }
     }
 }
