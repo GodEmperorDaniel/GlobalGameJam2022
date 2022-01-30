@@ -2,29 +2,45 @@
     "name": "DefaultControlls",
     "maps": [
         {
-            "name": "Character ",
+            "name": "CharacterInput",
             "id": "4ed2ba22-e3f5-461f-907e-0191915714e7",
             "actions": [
                 {
                     "name": "Moving",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "f834e8a3-e216-4e8f-98a5-e1e60ecde349",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 },
                 {
                     "name": "Graffiti/Clean",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "2a9a9c50-337f-46e9-8f17-a700cd0ccbea",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "Jump",
+                    "name": "Jump/Climb",
                     "type": "Button",
                     "id": "2c827bbf-1950-4af2-9642-9673fe1921ec",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "PowerUp1",
+                    "type": "Button",
+                    "id": "26a61a25-52dd-4f5f-a61d-ee30c6e78d57",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "PowerUp2",
+                    "type": "Button",
+                    "id": "4cc8c1fd-aa40-42cd-a78b-b5477ed56a34",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -34,7 +50,7 @@
                 {
                     "name": "ControllerJoystick",
                     "id": "2c1b7a65-5dbb-434a-8dbc-5261167c497c",
-                    "path": "2DVector",
+                    "path": "2DVector(mode=2)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -89,7 +105,7 @@
                 {
                     "name": "",
                     "id": "7c901b0d-60d5-432e-9052-d8bebc4987fe",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -104,7 +120,195 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "Jump",
+                    "action": "Jump/Climb",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a952a4bf-e228-43c5-9524-ba4a44187c50",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PowerUp1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34f5dbe9-81ab-4bb0-804e-da4e65a8121b",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PowerUp2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UIInput",
+            "id": "e395e0db-b775-4bd6-a259-5ee0ba7a82d7",
+            "actions": [
+                {
+                    "name": "UIMoving",
+                    "type": "Value",
+                    "id": "13ba86ba-c755-43b6-9a7e-cf94b91c6764",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Accept",
+                    "type": "Button",
+                    "id": "93e49e91-d82a-424c-9031-032bc0f555e9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Skip",
+                    "type": "Button",
+                    "id": "cca1fd65-9a1b-4ccf-bc06-d6a32b35bc00",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "FlipTheCard",
+                    "type": "Button",
+                    "id": "d4bcd6fd-6dbe-4f9f-9059-b940e600fc9e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "GoToCredits",
+                    "type": "Button",
+                    "id": "e6bb81d5-ee1c-489a-a7bf-d46e9f06b9d0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "GoToMenu",
+                    "type": "Button",
+                    "id": "4bfbed34-c74c-49d3-bcee-f7dcdad6dedb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "ControllerJoystick",
+                    "id": "3b48efb4-ebc1-44af-a797-ae764e9ee733",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "UIMoving",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "6a3f166e-38b8-4a99-be23-754fe1552b95",
+                    "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "UIMoving",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "c9190a03-7dc5-4bc4-aae5-6e074f9691d8",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "UIMoving",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "5150154f-a2c7-4d57-aac4-0622dad5e50e",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "UIMoving",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "cdbe7de9-2716-4802-9433-5faa7b353a62",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "UIMoving",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "89aac4ee-cbeb-47f3-82f9-81e28695dc88",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Accept",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd74bd56-68e1-40c2-ba50-99844575f8a1",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "433ebada-e549-450c-aeae-2cfd416cb4e8",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FlipTheCard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c63dfe9-e848-47f0-94c5-37dbcf1cc39d",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoToCredits",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "10c6c50a-5bab-480f-9f58-8473b174c109",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoToMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
