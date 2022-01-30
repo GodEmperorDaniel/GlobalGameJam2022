@@ -6594,8 +6594,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9eccede58c539488b0346e176475b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CreditsCanvas: {fileID: 1777323133}
-  Menu: {fileID: 3769692467186280713}
 --- !u!4 &339439789555213035
 Transform:
   m_ObjectHideFlags: 0
@@ -7676,6 +7674,8 @@ MonoBehaviour:
   mortImage1: {fileID: 3769692467322417234}
   mortImage2: {fileID: 3769692467872834666}
   ready: 0
+  CreditsCanvas: {fileID: 1777323133}
+  WinScreen: {fileID: 1806094093}
 --- !u!1 &720153039802287233
 GameObject:
   m_ObjectHideFlags: 0

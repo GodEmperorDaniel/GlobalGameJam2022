@@ -127,4 +127,20 @@ public class UIInputs : MonoBehaviour
             UIManager.UI.FlipThePictureTilda();
         }
     }
+
+    public void OnGoToCredits()
+    {
+        if (UIManager.UI.WinScreen.activeSelf)
+        {
+            UIManager.UI.DoCreditsNow();
+        }
+    }
+
+    public void OnGoToMenu()
+    {
+        if (UIManager.UI.CreditsCanvas.activeSelf)
+        {
+            UIManager.UI.PlayGameAgain();
+        }
+    }
 }

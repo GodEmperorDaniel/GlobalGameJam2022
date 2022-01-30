@@ -183,6 +183,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "GoToCredits",
+                    "type": "Button",
+                    "id": "e6bb81d5-ee1c-489a-a7bf-d46e9f06b9d0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "GoToMenu",
+                    "type": "Button",
+                    "id": "4bfbed34-c74c-49d3-bcee-f7dcdad6dedb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -271,6 +287,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "FlipTheCard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c63dfe9-e848-47f0-94c5-37dbcf1cc39d",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoToCredits",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "10c6c50a-5bab-480f-9f58-8473b174c109",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoToMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

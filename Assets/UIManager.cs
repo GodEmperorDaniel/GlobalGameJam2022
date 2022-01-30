@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -32,6 +33,9 @@ public class UIManager : MonoBehaviour
     public Image mortImage1;
     public Image mortImage2;
     [HideInInspector] public bool ready; 
+    
+    public GameObject CreditsCanvas;
+    public GameObject WinScreen;
 
     private void Awake()
     {
@@ -72,6 +76,7 @@ public class UIManager : MonoBehaviour
     {
         foreach (CharacterInformation p in CharacterInformation.players)
         {
+<<<<<<< Updated upstream
             p.es.gameObject.SetActive(false);
             if(SpawnPoint.spawn)
             {
@@ -84,6 +89,13 @@ public class UIManager : MonoBehaviour
                     p.transform.position = SpawnPoint.spawn.tilda.transform.position;
                 }
             }
+=======
+            p.es.gameObject.SetActive(false);
+            if(SpawnPoint.spawn)
+            {
+                p.transform.position = p._character == CharacterENUM.MORT ? SpawnPoint.spawn.mort.transform.position : SpawnPoint.spawn.tilda.transform.position;
+            }
+>>>>>>> Stashed changes
         }
         characterSelectObject.SetActive(false);
     }
@@ -149,5 +161,19 @@ public class UIManager : MonoBehaviour
         {
             MortPicture.sprite = MortFacts; 
         }
+    }
+    
+    public void DoCreditsNow()
+    {
+        //credits canvas
+        CreditsCanvas.gameObject.SetActive(true);
+        WinScreen.gameObject.SetActive(false);
+
+    }
+
+    public void PlayGameAgain()
+    {
+        //restart the game here
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
