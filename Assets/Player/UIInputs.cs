@@ -71,6 +71,7 @@ public class UIInputs : MonoBehaviour
                 }
             }
         }
+        
 
         else if(dialogueIsRunning )//&& UIManager.UI.gameObject.activeInHierarchy)
         {
@@ -99,5 +100,18 @@ public class UIInputs : MonoBehaviour
     public void ActivateMyEventSystem()
     {
         EventSystem.current = charInfo.es;
+    }
+    
+    public void OnSkip()
+    {
+        if (choosenCharacter == CharacterENUM.MORT)
+        {
+            UIManager.UI.MortBubble.OnSkipDialogue();
+        }
+        else
+        {
+            UIManager.UI.TildaBubble.OnSkipDialogue();
+        }
+           
     }
 }

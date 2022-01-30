@@ -74,6 +74,12 @@ public class Dialogue : MonoBehaviour
             textComponent.text = dialogueForBoth[index].text;
         }
     }
+
+    public void OnSkipDialogue()
+    {
+        //players can move again here
+        transform.parent.gameObject.SetActive(false);
+    }
     
     [System.Serializable]
     public class TextAndCharacter
