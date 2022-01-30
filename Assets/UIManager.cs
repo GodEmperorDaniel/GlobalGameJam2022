@@ -14,7 +14,6 @@ public class UIManager : MonoBehaviour
     public GameObject characterSelectObject;
     public static UIManager UI;
     public Dialogue TildaBubble;
-    public Dialogue MortBubble;
     public Image TildaPicture;
     public Image MortPicture;
     public GameObject textForInformation;
@@ -36,6 +35,7 @@ public class UIManager : MonoBehaviour
     
     public GameObject CreditsCanvas;
     public GameObject WinScreen;
+    public GameObject DialogueScreen; 
 
     private void Awake()
     {
@@ -93,7 +93,7 @@ public class UIManager : MonoBehaviour
         }
         characterSelectObject.SetActive(false);
     }
-    public void ChangeActionMap()
+    public void ChangeActionMapCharacterInput()
     {
         foreach (CharacterInformation p in CharacterInformation.players)
         {
@@ -102,6 +102,19 @@ public class UIManager : MonoBehaviour
             if(tempES && tempES.gameObject.activeInHierarchy)
             {
                 tempES.gameObject.SetActive(false);
+            }
+        }
+    }
+    
+    public void ChangeActionMapUIInput(bool main = false)
+    {
+        foreach (CharacterInformation p in CharacterInformation.players)
+        {
+            p.GetComponent<PlayerInput>().SwitchCurrentActionMap("UIInput");
+            EventSystem tempES = p.GetComponentInChildren<EventSystem>();
+            if(tempES && tempES.gameObject.activeInHierarchy)
+            {
+                tempES.gameObject.SetActive(main);
             }
         }
     }
