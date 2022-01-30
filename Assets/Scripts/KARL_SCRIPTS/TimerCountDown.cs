@@ -58,6 +58,8 @@ public class TimerCountDown : MonoBehaviour
 
         countDownDisplay.gameObject.SetActive(false);
 
+        UIManager.UI.ChangeActionMapCharacterInput();
+
         startTimer = true;
     }
 

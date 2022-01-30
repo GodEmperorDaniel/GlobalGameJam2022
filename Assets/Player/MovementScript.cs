@@ -49,7 +49,6 @@ public class MovementScript : MonoBehaviour
         }
         else if (CheckIfInAir()) //falling
         {
-            Debug.Log("fALLING?");
             newVel = new Vector3(_moveVec.x, _gravity.y, _moveVec.z);
         }
         else //moving and or jumping

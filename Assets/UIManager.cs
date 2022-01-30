@@ -35,7 +35,9 @@ public class UIManager : MonoBehaviour
     
     public GameObject CreditsCanvas;
     public GameObject WinScreen;
-    public GameObject DialogueScreen; 
+    public GameObject DialogueScreen;
+    public GameObject TimerScreen;
+    public GameObject HealthbarObj;
 
     private void Awake()
     {
@@ -82,15 +84,16 @@ public class UIManager : MonoBehaviour
                 if(p._character == CharacterENUM.MORT)
                 {
                     p.transform.position = SpawnPoint.spawn.mort.transform.position;
-                    //p.SetCharacterAnim();
+                    p.GetComponent<CharacterInformation>().Setstats();
                 }
                 else
                 {
-                    //p.SetCharacterAnim();
                     p.transform.position = SpawnPoint.spawn.tilda.transform.position;
+                    p.GetComponent<CharacterInformation>().Setstats();
                 }
             }
         }
+        DialogueScreen.SetActive(true);
         characterSelectObject.SetActive(false);
     }
     public void ChangeActionMapCharacterInput()

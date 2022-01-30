@@ -60,7 +60,9 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
-            UIManager.UI.ChangeActionMapCharacterInput();
+            //UIManager.UI.ChangeActionMapCharacterInput();
+            UIManager.UI.HealthbarObj.SetActive(true);
+            UIManager.UI.TimerScreen.SetActive(true);
             transform.parent.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
@@ -82,7 +84,9 @@ public class Dialogue : MonoBehaviour
     public void OnSkipDialogue()
     {
         //players can move again here
-        UIManager.UI.ChangeActionMapCharacterInput();
+        //UIManager.UI.ChangeActionMapCharacterInput();
+        UIManager.UI.HealthbarObj.SetActive(true);
+        UIManager.UI.TimerScreen.SetActive(true);
         transform.parent.gameObject.SetActive(false);
         gameObject.SetActive(false);
     }

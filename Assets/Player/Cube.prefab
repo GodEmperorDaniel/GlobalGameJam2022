@@ -142,10 +142,14 @@ MonoBehaviour:
   player2: {fileID: 21300000, guid: 32ced875248a9974cb138a10eede1819, type: 3}
   parent: {fileID: 0}
   defaultButton: {fileID: 0}
-  tilda: {fileID: 0}
-  mort: {fileID: 0}
+  mortModel: {fileID: 0}
+  mortArm: {fileID: 0}
+  tildaModel: {fileID: 0}
+  tildArm: {fileID: 0}
   tildaAnim: {fileID: 9100000, guid: 3402752325ed07a44aa184f57f6a5ab9, type: 2}
   mortAnim: {fileID: 9100000, guid: cfe044bc619e17d41a51aae1d907f0f8, type: 2}
+  tildaMat: {fileID: 2100000, guid: 3dd9a4e92294e4a4c978c0ea423bf921, type: 2}
+  mortMat: {fileID: 0}
 --- !u!33 &5359354500060754591
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -79,6 +79,36 @@ public class CharacterInformation : MonoBehaviour
             Gizmos.DrawLine(positions[i], (positions[i] - (new Vector3(0, _characterHeight / 2, 0))));
         }
     }
+    public void Setstats()
+    {
+        switch (_character)
+        {
+            case CharacterENUM.MORT:
+                MortSettings mort = new MortSettings();
+                _movementSpeed = mort._movementSpeed;
+                _jumpSpeed = mort._jumpSpeed;
+                _jumpCooldown = mort._jumpCooldown;
+                _jumpDuration = mort._jumpDuration;
+                _climbSpeed = mort._climbSpeed;
+                _characterHeight = mort._characterHeight;
+                _cleanOrGraffitiMultiplier = mort._cleanOrGraffitiMultiplier;
+                break;
+            case CharacterENUM.TILDA:
+                TildaSettings tilda = new TildaSettings();
+                _movementSpeed = tilda._movementSpeed;
+                _jumpSpeed = tilda._jumpSpeed;
+                _jumpCooldown = tilda._jumpCooldown;
+                _jumpDuration = tilda._jumpDuration;
+                _climbSpeed = tilda._climbSpeed;
+                _characterHeight = tilda._characterHeight;
+                _cleanOrGraffitiMultiplier = tilda._cleanOrGraffitiMultiplier;
+                break;
+            case CharacterENUM.NONE:
+                break;
+            default:
+                break;
+        }
+    }
     public void SetCharacterAnim()
     {
         Animator anim = GetComponent<Animator>();
@@ -100,6 +130,7 @@ public class CharacterInformation : MonoBehaviour
             default:
                 break;
         }
+        
     }
     private void Awake()
     {
@@ -120,4 +151,26 @@ public class CharacterInformation : MonoBehaviour
 public enum CharacterENUM
 {
     MORT, TILDA, NONE
+}
+
+public class MortSettings
+{
+    public float _movementSpeed = 2;
+    public float _jumpSpeed = 16;
+    public float _jumpCooldown = 0;
+    public float _jumpDuration = 0.5f;
+    public float _climbSpeed = 5;
+    public float _characterHeight = 1;
+    public float _cleanOrGraffitiMultiplier = 1;
+}
+
+public class TildaSettings
+{
+    public float _movementSpeed = 4;
+    public float _jumpSpeed = 16;
+    public float _jumpCooldown = 0;
+    public float _jumpDuration = 0.5f;
+    public float _climbSpeed = 1;
+    public float _characterHeight = 1;
+    public float _cleanOrGraffitiMultiplier = 1;
 }
