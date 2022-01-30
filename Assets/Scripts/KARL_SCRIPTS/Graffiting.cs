@@ -10,6 +10,8 @@ public class Graffiting : MonoBehaviour
 
     [Range(0,1)]
     [SerializeField] private float waitTime;
+
+    public bool tagBlocked;
     //private Color color;
 
     public bool isCleaned;
@@ -50,8 +52,6 @@ public class Graffiting : MonoBehaviour
             color = new Color(color.r, color.g, color.b, fadeAmount);
             myModel.material.color = color;
         }
-
-        
     }
     
     public void startFadeOut(UnityEngine.InputSystem.InputValue c, CharacterInformation charInfo)

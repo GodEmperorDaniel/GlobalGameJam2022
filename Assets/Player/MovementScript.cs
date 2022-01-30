@@ -89,12 +89,11 @@ public class MovementScript : MonoBehaviour
         }
         return false;
     }
-    public void OnMoving(InputValue c)
+    public void OnMoving(InputValue c) //add set forward to this c 
     {
         Vector2 normDirection = c.Get<Vector2>().normalized;
         Vector3 direction = new Vector3(normDirection.x, 0, normDirection.y);
-        Debug.Log("nothing to see here");
-        Vector3 dirRelativeCamera = Camera.current.transform.TransformDirection(direction);
+        Vector3 dirRelativeCamera = Camera.main.transform.TransformDirection(direction);
         _moveVec = dirRelativeCamera * charInfo._movementSpeed;
         Debug.Log(_moveVec);
     }

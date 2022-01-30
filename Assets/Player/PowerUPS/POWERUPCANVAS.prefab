@@ -186,3 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUp: 0
   rotationSpeed: 0.2
+  tildaPowerUp1: {fileID: 21300000, guid: 95471b6b551ecaf41b9348ae38b43dc7, type: 3}
+  tildaPowerUp2: {fileID: 21300000, guid: 9a7cf5301559cdc4692f9265b26e762a, type: 3}
+  mortPowerUp1: {fileID: 21300000, guid: 0a31277c1393f7f498fe6d1f1bca10eb, type: 3}
+  mortPowerUp2: {fileID: 21300000, guid: e7fa73201f9e477468ba0201a8b34c37, type: 3}
