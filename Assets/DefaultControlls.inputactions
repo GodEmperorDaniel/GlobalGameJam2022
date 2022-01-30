@@ -175,6 +175,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "FlipTheCard",
+                    "type": "Button",
+                    "id": "d4bcd6fd-6dbe-4f9f-9059-b940e600fc9e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -252,6 +260,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Skip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "433ebada-e549-450c-aeae-2cfd416cb4e8",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FlipTheCard",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
