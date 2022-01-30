@@ -1238,6 +1238,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: POWERUPCANVAS
       objectReference: {fileID: 0}
+    - target: {fileID: 219953044588171046, guid: 296fc84a21f633c40a88704f4085971d, type: 3}
+      propertyPath: powerUp
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 296fc84a21f633c40a88704f4085971d, type: 3}
 --- !u!1001 &5988478177503074255

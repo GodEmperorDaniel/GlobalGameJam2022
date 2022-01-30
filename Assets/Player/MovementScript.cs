@@ -22,6 +22,7 @@ public class MovementScript : MonoBehaviour
     public bool PowerUp1;
     public bool PowerUp2;
     [SerializeField] private float _doubleJumpTime = 10;
+    public float tagBlockDuration = 10;
     [SerializeField] private float _cleanAndGraffitiBuffTime = 10;
 
     WallDetector wallDetector = new WallDetector();
@@ -174,13 +175,13 @@ public class MovementScript : MonoBehaviour
         }
     }
     //doublejump & no tag!
-    public void OnPowerUp2()
+    public void OnPowerUp2(InputValue c)
     {
         if (PowerUp2)
         {
             if (charInfo._character == CharacterENUM.MORT)
             {
-                
+                wallDetector.interactingWithWall(transform, ref c, charInfo, true);
             }
             else
             {

@@ -8,7 +8,7 @@ public class Graffiting : MonoBehaviour
 {
     [SerializeField] private Renderer myModel;
 
-    [Range(0,1)]
+    [Range(0, 1)]
     [SerializeField] private float waitTime;
 
     public bool tagBlocked;
@@ -37,6 +37,13 @@ public class Graffiting : MonoBehaviour
             isCleaned = false;
     }
 
+    public IEnumerator ActivateNoTag(float time)
+    {
+        tagBlocked = true;
+        yield return new WaitForSeconds(time);
+        tagBlocked = false;
+    }
+
     public bool getIsCleaned { get { return isCleaned; } }
 
     public void startFadeIn(UnityEngine.InputSystem.InputValue c, CharacterInformation charInfo)
@@ -45,15 +52,18 @@ public class Graffiting : MonoBehaviour
     }
     private void FadeInMaterial(float waitTime, UnityEngine.InputSystem.InputValue c, CharacterInformation charInfo)
     {
-        if (myModel.material.color.a <= 1 && c.isPressed)
+        if (!tagBlocked)
         {
-            Color color = myModel.material.color;
-            float fadeAmount = color.a + (waitTime * charInfo._cleanOrGraffitiMultiplier);
-            color = new Color(color.r, color.g, color.b, fadeAmount);
-            myModel.material.color = color;
+            if (myModel.material.color.a <= 1 && c.isPressed)
+            {
+                Color color = myModel.material.color;
+                float fadeAmount = color.a + (waitTime * charInfo._cleanOrGraffitiMultiplier);
+                color = new Color(color.r, color.g, color.b, fadeAmount);
+                myModel.material.color = color;
+            }
         }
     }
-    
+
     public void startFadeOut(UnityEngine.InputSystem.InputValue c, CharacterInformation charInfo)
     {
         FadeOutMaterial(waitTime, c, charInfo);
