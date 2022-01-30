@@ -15,10 +15,10 @@ public class PresentWinner:MonoBehaviour
     public void CheckForWinner()
     {
         if (percentageGraffiti.GetWinner() == 1)
-            gameObject.transform.Find("TildaWon").transform.gameObject.SetActive(true);
+            Debug.Log("TildaWon");//gameObject.transform.Find("TildaWon").transform.gameObject.SetActive(true);
         else if (percentageGraffiti.GetWinner() == 2)
-            gameObject.transform.Find("MortWon").transform.gameObject.SetActive(true);
+            Debug.Log("MortWon");//gameObject.transform.Find("MortWon").transform.gameObject.SetActive(true);
         else
-            gameObject.transform.Find("Tie").transform.gameObject.SetActive(true);
+            Debug.Log("Tie");//gameObject.transform.Find("Tie").transform.gameObject.SetActive(true);
     }
 }
