@@ -81,6 +81,7 @@ public class Dialogue : MonoBehaviour
         transform.parent.gameObject.SetActive(false);
     }
     
+    
     [System.Serializable]
     public class TextAndCharacter
     {

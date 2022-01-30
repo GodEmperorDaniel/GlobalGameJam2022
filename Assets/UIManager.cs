@@ -13,6 +13,14 @@ public class UIManager : MonoBehaviour
     public static UIManager UI;
     public Dialogue TildaBubble;
     public Dialogue MortBubble;
+    public Image TildaPicture;
+    public Image MortPicture;
+    public GameObject textForInformation;
+    
+    private Sprite TildaFacts;
+    private Sprite MortFacts;
+    private Sprite TildaPortrait;
+    private Sprite MortPortrait;
 
     public GameObject defaulButton;
     public TextMeshProUGUI xFor;
@@ -27,6 +35,12 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         UI = this;
+        //sprites to change between
+        TildaPortrait = Resources.Load<Sprite>("TildaCharacterCard");
+        MortPortrait = Resources.Load<Sprite>("MortCharacterCard");
+        TildaFacts = Resources.Load<Sprite>("TildaCardBack");
+        MortFacts = Resources.Load<Sprite>("MortCardBack");
+        
         PressXToJoinGame();
     }
     private void Update()
@@ -87,5 +101,30 @@ public class UIManager : MonoBehaviour
             }
         }
         return true;
+    }
+    
+    public void FlipThePictureTilda()
+    {
+        if (TildaPicture.sprite == TildaFacts)
+        {
+            TildaPicture.sprite = TildaPortrait;
+        }
+        else
+        {
+            TildaPicture.sprite = TildaFacts; 
+
+        }
+    }
+
+    public void FlipThePictureMort()
+    {
+        if (MortPicture.sprite == MortFacts)
+        {
+            MortPicture.sprite = MortPortrait;
+        }
+        else
+        {
+            MortPicture.sprite = MortFacts; 
+        }
     }
 }

@@ -112,4 +112,16 @@ public class UIInputs : MonoBehaviour
         }
            
     }
+
+    public void OnFlipTheCard()
+    {
+        if (charInfo.es.currentSelectedGameObject.name == "RightButton")
+        {
+            UIManager.UI.FlipThePictureMort();
+        }
+        else if (charInfo.es.currentSelectedGameObject.name == "LeftButton")
+        {
+            UIManager.UI.FlipThePictureTilda();
+        }
+    }
 }
