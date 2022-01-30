@@ -10,7 +10,7 @@ public class CharacterInformation : MonoBehaviour
     [HideInInspector] public static List<CharacterInformation> players = new List<CharacterInformation>();
     [Header("CharacterSelection")]
     public CharacterENUM _character = CharacterENUM.NONE;
-    [Header("SpeedStats")]
+    [Header("CharacterStats")]
     public float _movementSpeed = 1;
     public float _jumpSpeed = 1;
     [Tooltip("If 0 can jump as fast as you hit ground")]
@@ -19,6 +19,7 @@ public class CharacterInformation : MonoBehaviour
     public float _climbSpeed = 1;
     [Tooltip("In unity units")]
     public float _characterHeight = 1;
+    public float _cleanOrGraffitiMultiplier = 1;
 
     public EventSystem es;
 

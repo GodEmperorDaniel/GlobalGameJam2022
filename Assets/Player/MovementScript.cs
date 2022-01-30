@@ -18,11 +18,10 @@ public class MovementScript : MonoBehaviour
     private Coroutine c_jumpCooldown;
 
     [Header("PowerUp Things")]
-    [HideInInspector] public bool PowerUp1;
-    [HideInInspector] public bool PowerUp2;
+    public bool PowerUp1;
+    public bool PowerUp2;
     [SerializeField] private float _doubleJumpTime = 10;
-    private bool _doubleJumpActive;
-    private int _nrOfJumps = 0;
+    [SerializeField] private float _cleanAndGraffitiBuffTime = 10;
 
     WallDetector wallDetector = new WallDetector();
 
@@ -97,7 +96,7 @@ public class MovementScript : MonoBehaviour
 
     public void OnJumpClimb()
     {
-        if (CheckIfInAir() && !_doubleJumpActive)
+        if (CheckIfInAir())
         {
             return;
         }
@@ -122,43 +121,38 @@ public class MovementScript : MonoBehaviour
         _gravity = Vector3.zero;
         yield return new WaitForSeconds(charInfo._jumpDuration);
         _gravity = new Vector3(0, -5, 0);
-        if (!_doubleJumpActive || (_doubleJumpActive && _nrOfJumps > 1))
+        while (CheckIfInAir())
         {
-            while (CheckIfInAir())
-            {
-                yield return null;
-            }
-            _isJumping = false;
-            yield return new WaitForSeconds(charInfo._jumpCooldown);
-            _nrOfJumps = 0;
-            c_jumpCooldown = null;
+            yield return null;
         }
-        else
-        {
-            yield return new WaitForEndOfFrame();
-            _nrOfJumps++;
-            _isJumping = false;
-            c_jumpCooldown = null;
-        }
+        _isJumping = false;
+        yield return new WaitForSeconds(charInfo._jumpCooldown);
+        c_jumpCooldown = null;
     }
     private IEnumerator DoubleJumpActive()
     {
-        _doubleJumpActive = true;
+        charInfo._jumpSpeed *= 2.5f;
         yield return new WaitForSeconds(_doubleJumpTime);
-        _doubleJumpActive = false;
+        charInfo._jumpSpeed /= 2.5f;
     }
     public void OnGraffitiClean(InputValue c) //might not be able to do callback context, just check information in controller scheme?
     {
         if (charInfo._character == CharacterENUM.MORT)
         {
             //test do clean
-            wallDetector.interactingWithWall(transform, ref c, charInfo._character);
+            wallDetector.interactingWithWall(transform, ref c, charInfo);
         }
         else
         {
             //test do graffiti
-            wallDetector.interactingWithWall(transform, ref c, charInfo._character);
+            wallDetector.interactingWithWall(transform, ref c, charInfo);
         }
+    }
+    private IEnumerator CleanOrGraffitiMulti()
+    {
+        charInfo._cleanOrGraffitiMultiplier *= 2;
+        yield return new WaitForSeconds(_cleanAndGraffitiBuffTime);
+        charInfo._cleanOrGraffitiMultiplier /= 2;
     }
     //fast-tag amd speedy clean
     public void OnPowerUp1()
@@ -167,11 +161,11 @@ public class MovementScript : MonoBehaviour
         {
             if (charInfo._character == CharacterENUM.MORT)
             {
-
+                StartCoroutine(CleanOrGraffitiMulti());
             }
             else
             {
-
+                StartCoroutine(CleanOrGraffitiMulti());
             }
         }
     }
