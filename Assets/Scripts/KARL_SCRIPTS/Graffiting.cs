@@ -36,8 +36,11 @@ public class Graffiting : MonoBehaviour
         else
             isCleaned = false;
     }
-
-    public IEnumerator ActivateNoTag(float time)
+    public void ActivateNoTag(float time)
+    {
+        StartCoroutine(ActivateAntiTaging(time));
+    }
+    public IEnumerator ActivateAntiTaging(float time)
     {
         tagBlocked = true;
         yield return new WaitForSeconds(time);
@@ -61,6 +64,10 @@ public class Graffiting : MonoBehaviour
                 color = new Color(color.r, color.g, color.b, fadeAmount);
                 myModel.material.color = color;
             }
+        }
+        else
+        {
+            Debug.Log("GET BLOCKED");
         }
     }
 

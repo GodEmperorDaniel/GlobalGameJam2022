@@ -14,7 +14,7 @@ public class UIInputs : MonoBehaviour
     }
     public void OnUIMoving()
     {
-        if(CharacterInformation.players.Count <= 1)
+        if (CharacterInformation.players.Count <= 1)
         {
             charInfo.es.gameObject.SetActive(false);
             return;
@@ -42,7 +42,7 @@ public class UIInputs : MonoBehaviour
                 choosenCharacter = CharacterENUM.MORT;
                 return;
             }
-            else if(charInfo.es.currentSelectedGameObject.name == "LeftButton" && choosenCharacter != CharacterENUM.TILDA)
+            else if (charInfo.es.currentSelectedGameObject.name == "LeftButton" && choosenCharacter != CharacterENUM.TILDA)
             {
                 choosenCharacter = CharacterENUM.TILDA;
                 return;
@@ -58,7 +58,7 @@ public class UIInputs : MonoBehaviour
                     }
                     else
                     {
-                        if(choosenCharacter == CharacterENUM.MORT)
+                        if (choosenCharacter == CharacterENUM.MORT)
                         {
                             p._character = CharacterENUM.TILDA;
                         }
@@ -71,7 +71,7 @@ public class UIInputs : MonoBehaviour
                 UIManager.UI.StartGame();
             }
         }
-        else if(dialogueIsRunning)//&& UIManager.UI.gameObject.activeInHierarchy)
+        else if (dialogueIsRunning)//&& UIManager.UI.gameObject.activeInHierarchy)
         {
             if (choosenCharacter == CharacterENUM.MORT)
             {
@@ -99,18 +99,21 @@ public class UIInputs : MonoBehaviour
     {
         EventSystem.current = charInfo.es;
     }
-    
+
     public void OnSkip()
     {
-        if (choosenCharacter == CharacterENUM.MORT)
+        if (!UIManager.UI.characterSelectObject.activeInHierarchy)
         {
-            UIManager.UI.MortBubble.OnSkipDialogue();
+            if (choosenCharacter == CharacterENUM.MORT)
+            {
+                UIManager.UI.TildaBubble.OnSkipDialogue();
+            }
+            else
+            {
+                UIManager.UI.TildaBubble.OnSkipDialogue();
+            }
         }
-        else
-        {
-            UIManager.UI.TildaBubble.OnSkipDialogue();
-        }
-           
+
     }
 
     public void OnFlipTheCard()

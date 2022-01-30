@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.Animations;
 
 public class CharacterInformation : MonoBehaviour
 {
@@ -29,9 +30,11 @@ public class CharacterInformation : MonoBehaviour
     public Sprite player2;
     public GameObject parent;
     public GameObject defaultButton;
-    [Header("Playable Character")]
+    [Header("Playable Character things")]
     public GameObject tilda;
     public GameObject mort;
+    public RuntimeAnimatorController tildaAnim;
+    public RuntimeAnimatorController mortAnim;
 
     public void spawnPlayerImage()
     {
@@ -74,7 +77,24 @@ public class CharacterInformation : MonoBehaviour
             Gizmos.DrawLine(positions[i], (positions[i] - (new Vector3(0, _characterHeight / 2, 0))));
         }
     }
-
+    public void SetCharacterAnim()
+    {
+        Animator anim = GetComponent<Animator>();
+        switch (_character)
+        {
+            case CharacterENUM.MORT:
+                anim.runtimeAnimatorController = mortAnim;
+                break;
+            case CharacterENUM.TILDA:
+                anim.runtimeAnimatorController = tildaAnim;
+                break;
+            case CharacterENUM.NONE:
+                Debug.LogWarning("NOW SOMETHING WENT VERY WRONG WHEN SETTING ANIMATION");
+                break;
+            default:
+                break;
+        }
+    }
     private void Awake()
     {
         transform.position = new Vector3(0, UnityEngine.Random.Range(2f,20f));
@@ -82,7 +102,6 @@ public class CharacterInformation : MonoBehaviour
         {
             players.Add(this);
         }
-        //_character = (CharacterENUM)PlayerJoinAction._playerCount - 1;
         if (UIManager.UI == null)
         {
             return;

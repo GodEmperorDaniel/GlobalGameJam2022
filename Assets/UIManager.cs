@@ -75,7 +75,14 @@ public class UIManager : MonoBehaviour
             p.es.gameObject.SetActive(false);
             if(SpawnPoint.spawn)
             {
-                p.transform.position = p._character == CharacterENUM.MORT ? SpawnPoint.spawn.mort.transform.position : SpawnPoint.spawn.tilda.transform.position;
+                if(p._character == CharacterENUM.MORT)
+                {
+                    p.transform.position = SpawnPoint.spawn.mort.transform.position;
+                }
+                else
+                {
+                    p.transform.position = SpawnPoint.spawn.tilda.transform.position;
+                }
             }
         }
         characterSelectObject.SetActive(false);

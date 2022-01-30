@@ -46,6 +46,7 @@ public class MovementScript : MonoBehaviour
         }
         else if (CheckIfInAir()) //falling
         {
+            Debug.Log("fALLING?");
             newVel = new Vector3(_moveVec.x, _gravity.y, _moveVec.z);
         }
         else //moving and or jumping
@@ -53,7 +54,6 @@ public class MovementScript : MonoBehaviour
             newVel = new Vector3(_moveVec.x, _isJumping ? charInfo._jumpSpeed : 0, _moveVec.z);
         }
         rb.velocity = newVel * Time.fixedDeltaTime * _MULTIPLIER;
-        //rb.AddForce(newVel * Time.fixedDeltaTime * _MULTIPLIER);
     }
     private bool CheckIfInAir()
     {
@@ -73,14 +73,18 @@ public class MovementScript : MonoBehaviour
             new Vector3(transform.position.x + raycastOffset, transform.position.y, transform.position.z - raycastOffset),
             new Vector3(transform.position.x - raycastOffset, transform.position.y, transform.position.z + raycastOffset)
         };
+
+        foreach (Vector3 pos in positions)
+        {
+            
+        }
         int rayInAir = 0;
         for (int i = 0; i < 9; i++)
         {
             Ray ray = new Ray(positions[i], Vector3.down);
             bool didRayHit = Physics.Raycast(ray, out RaycastHit hit);
-            if (didRayHit && Mathf.Abs(hit.point.y - transform.position.y) > (charInfo._characterHeight) / 2)
+            if (didRayHit && Mathf.Abs(hit.point.y - transform.position.y) > (charInfo._characterHeight + 0.2f) / 2)
             {
-                //Debug.Log(Mathf.Abs(hit.point.y - transform.position.y) + " and " + (charInfo._characterHeight) / 2);
                 rayInAir++;
             }
             if (rayInAir == 9)
@@ -95,8 +99,11 @@ public class MovementScript : MonoBehaviour
         Vector2 normDirection = c.Get<Vector2>().normalized;
         Vector3 direction = new Vector3(normDirection.x, 0, normDirection.y);
         Vector3 dirRelativeCamera = Camera.main.transform.TransformDirection(direction);
+        if (new Vector3(dirRelativeCamera.x, transform.forward.y, dirRelativeCamera.z) != transform.forward && new Vector3(dirRelativeCamera.x, 0, dirRelativeCamera.z) != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(new Vector3(dirRelativeCamera.x, transform.forward.y, dirRelativeCamera.z), Vector3.up);
+        }
         _moveVec = dirRelativeCamera * charInfo._movementSpeed;
-        Debug.Log(_moveVec);
     }
 
     public void OnJumpClimb()

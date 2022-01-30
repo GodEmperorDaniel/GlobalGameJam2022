@@ -23,10 +23,10 @@ public class PowerUPObject : MonoBehaviour
                 i.sprite = tildaPowerUp1;
                 break;
             case PowerUpEnum.NOTAGS:
-                i.sprite = tildaPowerUp2;
+                i.sprite = mortPowerUp2;
                 break;
             case PowerUpEnum.SPEEDYCLEAN:
-                i.sprite = tildaPowerUp1;
+                i.sprite = mortPowerUp1;
                 break;
             default:
                 break;
@@ -38,7 +38,6 @@ public class PowerUPObject : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Collided");
         CharacterInformation ci;
         if (other.gameObject.TryGetComponent<CharacterInformation>(out ci))
         {

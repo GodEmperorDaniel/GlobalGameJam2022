@@ -7,16 +7,12 @@ using UnityEngine.InputSystem;
 
 public class WallDetector
 {
-    //public void FixedUpdate()
-    //{
-    //    interactingWithWall(this.transform);
-    //}
     public void interactingWithWall(Transform tran, ref InputValue c, CharacterInformation charInfo, bool blockTag = false)
     {
         int contactDistance = 2;
         int layerMask = 1 << 6;
         Ray ray = new Ray(tran.position, tran.forward);
-        Ray rayDown = new Ray(tran.position, -tran.up);
+        Ray rayDown = new Ray(tran.position, - tran.up);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, contactDistance, layerMask))
@@ -26,6 +22,8 @@ public class WallDetector
             {
                 if (blockTag)
                 {
+                    charInfo.GetComponent<MovementScript>().PowerUp2 = false;
+                    UIManager.UI.SetPowerUpImage(UIManager.UI.mortImage2, false);
                     TagBlocker(hit, charInfo);
                 }
                 else
