@@ -17,6 +17,13 @@ public class MovementScript : MonoBehaviour
     private bool _isClimbing = false;
     private Coroutine c_jumpCooldown;
 
+    [Header("PowerUp Things")]
+    [HideInInspector] public bool PowerUp1;
+    [HideInInspector] public bool PowerUp2;
+    [SerializeField] private float _doubleJumpTime = 10;
+    private bool _doubleJumpActive;
+    private int _nrOfJumps = 0;
+
     WallDetector wallDetector = new WallDetector();
 
     private void Start()
@@ -31,7 +38,6 @@ public class MovementScript : MonoBehaviour
         Vector3 newVel = Vector3.zero;
         if (_isClimbing) //climbing
         {
-            //Debug.Log("we clibing");
             if (_moveVec.magnitude > 0.1f)
             {
                 newVel = new Vector3(0, charInfo._climbSpeed);
@@ -91,7 +97,7 @@ public class MovementScript : MonoBehaviour
 
     public void OnJumpClimb()
     {
-        if (CheckIfInAir())
+        if (CheckIfInAir() && !_doubleJumpActive)
         {
             return;
         }
@@ -111,18 +117,35 @@ public class MovementScript : MonoBehaviour
             _isClimbing = false;
         }
     }
-    private IEnumerator JumpCooldown()
+    private IEnumerator JumpCooldown() //if doublejump we gotta 
     {
         _gravity = Vector3.zero;
-        yield return new WaitForSeconds(charInfo._jumpDuration);
-        _gravity = new Vector3(0, -5, 0);
-        while (CheckIfInAir())
+        if (!_doubleJumpActive || (_doubleJumpActive && _nrOfJumps > 1))
         {
-            yield return null;
+            yield return new WaitForSeconds(charInfo._jumpDuration);
+            _gravity = new Vector3(0, -5, 0);
+            while (CheckIfInAir())
+            {
+                yield return null;
+            }
+            _isJumping = false;
+            yield return new WaitForSeconds(charInfo._jumpCooldown);
+            _nrOfJumps = 0;
+            c_jumpCooldown = null;
         }
-        _isJumping = false;
-        yield return new WaitForSeconds(charInfo._jumpCooldown);
-        c_jumpCooldown = null;
+        else
+        {
+            yield return new WaitForEndOfFrame();
+            _nrOfJumps++;
+            _isJumping = false;
+            c_jumpCooldown = null;
+        }
+    }
+    private IEnumerator DoubleJumpActive()
+    {
+        _doubleJumpActive = true;
+        yield return new WaitForSeconds(_doubleJumpTime);
+        _doubleJumpActive = false;
     }
     public void OnGraffitiClean(InputValue c) //might not be able to do callback context, just check information in controller scheme?
     {
@@ -140,25 +163,34 @@ public class MovementScript : MonoBehaviour
     //fast-tag amd speedy clean
     public void OnPowerUp1()
     {
-        if (charInfo._character == CharacterENUM.MORT)
+        if (PowerUp1)
         {
+            if (charInfo._character == CharacterENUM.MORT)
+            {
 
-        }
-        else
-        {
+            }
+            else
+            {
 
+            }
         }
     }
-    //doublejump & wallblock!
+    //doublejump & no tag!
     public void OnPowerUp2()
     {
-        if (charInfo._character == CharacterENUM.MORT)
+        if (PowerUp2)
         {
+            if (charInfo._character == CharacterENUM.MORT)
+            {
 
-        }
-        else
-        {
-
+            }
+            else
+            {
+                Debug.Log("PowerUP used");
+                UIManager.UI.SetPowerUpImage(UIManager.UI.tildaImage2, false);
+                PowerUp2 = false;
+                StartCoroutine(DoubleJumpActive());
+            }
         }
     }
     private void OnTriggerEnter(Collider other)

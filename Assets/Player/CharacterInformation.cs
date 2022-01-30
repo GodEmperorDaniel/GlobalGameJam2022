@@ -36,8 +36,6 @@ public class CharacterInformation : MonoBehaviour
     {
         GameObject go;
         go = Instantiate(image, parent.transform);
-        //TextMeshProUGUI text;
-        //Sprite sp = go.GetComponent<Image>().sprite;
 
         if (PlayerJoinAction._playerCount == 1)
         {
@@ -88,7 +86,7 @@ public class CharacterInformation : MonoBehaviour
             return;
         }
         defaultButton = UIManager.UI.defaulButton;
-        parent = UIManager.UI.gameObject;
+        parent = UIManager.UI.characterSelectObject;
         spawnPlayerImage();
     }
 }

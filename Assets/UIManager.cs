@@ -8,13 +8,21 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Character Select Things")]
+    public GameObject characterSelectObject;
     public static UIManager UI;
-    public GameObject defaulButton;
-    public TextMeshProUGUI xFor;
-    [HideInInspector] public bool ready;
     public Dialogue TildaBubble;
     public Dialogue MortBubble;
 
+    public GameObject defaulButton;
+    public TextMeshProUGUI xFor;
+    [Header("PowerUp Things")]
+    [SerializeField] private Color grayTintColour;
+    public Image tildaImage1;
+    public Image tildaImage2;
+    public Image mortImage1;
+    public Image mortImage2;
+    [HideInInspector] public bool ready; 
 
     private void Awake()
     {
@@ -52,8 +60,18 @@ public class UIManager : MonoBehaviour
             p.es.gameObject.SetActive(false);
             p.GetComponent<PlayerInput>().SwitchCurrentActionMap("CharacterInput"); 
         }
-        
-        gameObject.SetActive(false);
+        characterSelectObject.SetActive(false);
+    }
+    public void SetPowerUpImage(Image i, bool haveIt)
+    {
+        if(!haveIt)
+        {
+            i.color = grayTintColour;
+        }
+        else
+        {
+            i.color = Color.white;
+        }
     }
     public bool CheckIfBothSelectedCharacter()
     {
