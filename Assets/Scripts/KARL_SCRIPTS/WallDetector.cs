@@ -16,9 +16,22 @@ public class WallDetector
         int contactDistance = 2;
         int layerMask = 1 << 6;
         Ray ray = new Ray(tran.position, tran.forward);
+        Ray rayDown = new Ray(tran.position, -tran.up);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, contactDistance, layerMask))
+        {
+            Debug.DrawLine(ray.origin, hit.point, Color.red);
+            if (charInfo._character == CharacterENUM.MORT)
+            {
+                CallCleaning(hit, c, charInfo);
+            }
+            else
+            {
+                CallGrafitti(hit, c, charInfo);
+            }
+        }
+        else if (Physics.Raycast(rayDown, out hit, contactDistance, layerMask))
         {
             Debug.DrawLine(ray.origin, hit.point, Color.red);
             if (charInfo._character == CharacterENUM.MORT)
@@ -35,7 +48,6 @@ public class WallDetector
             Debug.DrawLine(ray.origin, ray.origin + ray.direction * 100, Color.green);
         }
     }
-
     private void CallGrafitti(RaycastHit hit, InputValue c, CharacterInformation charInfo)
     {
         Graffiting graffiting = hit.collider.gameObject.GetComponent(typeof(Graffiting)) as Graffiting;
@@ -59,7 +71,7 @@ public class WallDetector
         }
         else
         {
-            Debug.Log("Hittar inte graffiting");
+            Debug.Log("Hittar inte cleaning");
         } 
     }
 }
