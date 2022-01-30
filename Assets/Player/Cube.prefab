@@ -327,6 +327,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gravity: {x: 0, y: -5, z: 0}
+  raycastOffset: 0.5
+  PowerUp1: 0
+  PowerUp2: 0
+  _doubleJumpTime: 10
 --- !u!114 &2882227074274052237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,4 +374,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   choosenCharacter: 2
-  dialogueIsRunning: 1
+  dialogueIsRunning: 0

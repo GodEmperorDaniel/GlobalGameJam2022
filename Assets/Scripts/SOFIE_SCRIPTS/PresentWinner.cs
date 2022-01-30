@@ -6,17 +6,17 @@ using UnityEngine;
 
 public class PresentWinner : MonoBehaviour
 {
-    private void Update()
-    {
-        if(//tildaWon == true)
-        gameObject.transform.Find("TildaWon").transform.gameObject.SetActive(true);
+//    private void Update()
+//    {
+//        if(//tildaWon == true)
+//        gameObject.transform.Find("TildaWon").transform.gameObject.SetActive(true);
         
-        else if(//tildaWon==false)
-        gameObject.transform.Find("MortWon").transform.gameObject.SetActive(true);
+//        else if(//tildaWon==false)
+//        gameObject.transform.Find("MortWon").transform.gameObject.SetActive(true);
         
-        else
-        {
-            gameObject.transform.Find("Tie").transform.gameObject.SetActive(true);
-        }
-    }
+//        else
+//        {
+//            gameObject.transform.Find("Tie").transform.gameObject.SetActive(true);
+//        }
+//    }
 }

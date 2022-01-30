@@ -120,10 +120,10 @@ public class MovementScript : MonoBehaviour
     private IEnumerator JumpCooldown() //if doublejump we gotta 
     {
         _gravity = Vector3.zero;
+        yield return new WaitForSeconds(charInfo._jumpDuration);
+        _gravity = new Vector3(0, -5, 0);
         if (!_doubleJumpActive || (_doubleJumpActive && _nrOfJumps > 1))
         {
-            yield return new WaitForSeconds(charInfo._jumpDuration);
-            _gravity = new Vector3(0, -5, 0);
             while (CheckIfInAir())
             {
                 yield return null;

@@ -71,9 +71,7 @@ public class UIInputs : MonoBehaviour
                 }
             }
         }
-        
-
-        else if(dialogueIsRunning )//&& UIManager.UI.gameObject.activeInHierarchy)
+        else if(dialogueIsRunning)//&& UIManager.UI.gameObject.activeInHierarchy)
         {
             if (choosenCharacter == CharacterENUM.MORT)
             {
