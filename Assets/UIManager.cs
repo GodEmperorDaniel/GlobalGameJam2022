@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
     public Image TildaPicture;
     public Image MortPicture;
     public GameObject textForInformation;
-    
+
     private Sprite TildaFacts;
     private Sprite MortFacts;
     private Sprite TildaPortrait;
@@ -31,8 +31,8 @@ public class UIManager : MonoBehaviour
     public Image tildaImage2;
     public Image mortImage1;
     public Image mortImage2;
-    [HideInInspector] public bool ready; 
-    
+    [HideInInspector] public bool ready;
+
     public GameObject CreditsCanvas;
     public GameObject WinScreen;
     public GameObject DialogueScreen;
@@ -47,17 +47,17 @@ public class UIManager : MonoBehaviour
         MortPortrait = Resources.Load<Sprite>("MortCharacterCard");
         TildaFacts = Resources.Load<Sprite>("TildaCardBack");
         MortFacts = Resources.Load<Sprite>("MortCardBack");
-        
+
         PressXToJoinGame();
     }
     private void Update()
     {
-        if(CheckIfBothSelectedCharacter())
+        if (CheckIfBothSelectedCharacter())
         {
             ShowContinueUI();
             ready = true;
         }
-        if(CharacterInformation.players.Count > 1)
+        if (CharacterInformation.players.Count > 1)
         {
             PressXToselectCharacter();
         }
@@ -78,18 +78,19 @@ public class UIManager : MonoBehaviour
     {
         foreach (CharacterInformation p in CharacterInformation.players)
         {
+            p.Setstats();
+            p.SetCharacterAnim();
+
             p.es.gameObject.SetActive(false);
-            if(SpawnPoint.spawn)
+            if (SpawnPoint.spawn)
             {
-                if(p._character == CharacterENUM.MORT)
+                if (p._character == CharacterENUM.MORT)
                 {
                     p.transform.position = SpawnPoint.spawn.mort.transform.position;
-                    p.GetComponent<CharacterInformation>().Setstats();
                 }
                 else
                 {
                     p.transform.position = SpawnPoint.spawn.tilda.transform.position;
-                    p.GetComponent<CharacterInformation>().Setstats();
                 }
             }
         }
@@ -102,20 +103,20 @@ public class UIManager : MonoBehaviour
         {
             p.GetComponent<PlayerInput>().SwitchCurrentActionMap("CharacterInput");
             EventSystem tempES = p.GetComponentInChildren<EventSystem>();
-            if(tempES && tempES.gameObject.activeInHierarchy)
+            if (tempES && tempES.gameObject.activeInHierarchy)
             {
                 tempES.gameObject.SetActive(false);
             }
         }
     }
-    
+
     public void ChangeActionMapUIInput(bool main = false)
     {
         foreach (CharacterInformation p in CharacterInformation.players)
         {
             p.GetComponent<PlayerInput>().SwitchCurrentActionMap("UIInput");
             EventSystem tempES = p.GetComponentInChildren<EventSystem>();
-            if(tempES && tempES.gameObject.activeInHierarchy)
+            if (tempES && tempES.gameObject.activeInHierarchy)
             {
                 tempES.gameObject.SetActive(main);
             }
@@ -123,7 +124,7 @@ public class UIManager : MonoBehaviour
     }
     public void SetPowerUpImage(Image i, bool haveIt)
     {
-        if(!haveIt)
+        if (!haveIt)
         {
             i.color = grayTintColour;
         }
@@ -134,7 +135,7 @@ public class UIManager : MonoBehaviour
     }
     public bool CheckIfBothSelectedCharacter()
     {
-        if(CharacterInformation.players.Count <= 1)
+        if (CharacterInformation.players.Count <= 1)
         {
             return false;
         }
@@ -147,7 +148,7 @@ public class UIManager : MonoBehaviour
         }
         return true;
     }
-    
+
     public void FlipThePictureTilda()
     {
         if (TildaPicture.sprite == TildaFacts)
@@ -156,7 +157,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            TildaPicture.sprite = TildaFacts; 
+            TildaPicture.sprite = TildaFacts;
 
         }
     }
@@ -169,10 +170,10 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            MortPicture.sprite = MortFacts; 
+            MortPicture.sprite = MortFacts;
         }
     }
-    
+
     public void DoCreditsNow()
     {
         //credits canvas
@@ -184,6 +185,9 @@ public class UIManager : MonoBehaviour
     public void PlayGameAgain()
     {
         //restart the game here
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        CharacterInformation.players = new List<CharacterInformation>();
+        PlayerJoinAction._playerCount = 0;
+        SceneManager.LoadSceneAsync(0);
     }
+
 }

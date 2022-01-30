@@ -28,15 +28,14 @@ public class TimerCountDown : MonoBehaviour
         if (startTimer)
         {
             currentTime -= 1 * Time.deltaTime;
-            counterText.text = currentTime.ToString();
+            counterText.text = Math.Max(currentTime, 0.0f).ToString("0.##");
             if (currentTime <= 0)
             {
                 currentTime = 0;
-                //KAlla på den som vann
                 presentWinner.CheckForWinner();
             }
         }
-        
+
     }
 
     IEnumerator CountTimeToStart()

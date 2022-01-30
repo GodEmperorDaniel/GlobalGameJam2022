@@ -13,6 +13,9 @@ public class Dialogue : MonoBehaviour
     public Vector3 MortBubblePosition;
     public Vector3 TildaBubblePosition;
     public GameObject dialogueText;
+    public Image characterPortraitObject;
+    public Sprite tilda;
+    public Sprite mort;
 
     private int index;
 
@@ -30,16 +33,23 @@ public class Dialogue : MonoBehaviour
 
     IEnumerator TypeDialogue()
     {
-        if(dialogueForBoth[index].character is CharacterENUM.MORT)
+        if (dialogueForBoth[index].character is CharacterENUM.MORT)
         {
+            characterPortraitObject.sprite = mort;
+            characterPortraitObject.transform.eulerAngles = Vector3.zero;
             GetComponent<RectTransform>().anchoredPosition = MortBubblePosition;
-            GetComponent<RectTransform>().eulerAngles = new Vector3(0,0,0);
+            GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, 0);
             dialogueText.transform.localScale = new Vector3(1, 1, 1);
         }
         else
         {
+            characterPortraitObject.sprite = tilda;
+            if (characterPortraitObject.transform.eulerAngles != new Vector3(0, 180, 0))
+            {
+                characterPortraitObject.transform.eulerAngles = new Vector3(0, 180, 0);
+            }
             GetComponent<RectTransform>().anchoredPosition = TildaBubblePosition;
-            GetComponent<RectTransform>().eulerAngles = new Vector3(0,180,0);
+            GetComponent<RectTransform>().eulerAngles = new Vector3(0, 180, 0);
             dialogueText.transform.localScale = new Vector3(-1, 1, 1);
         }
         foreach (char c in dialogueForBoth[index].text)
@@ -47,7 +57,7 @@ public class Dialogue : MonoBehaviour
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
-        
+
     }
 
     void nextLine()
@@ -84,14 +94,20 @@ public class Dialogue : MonoBehaviour
     public void OnSkipDialogue()
     {
         //players can move again here
-        //UIManager.UI.ChangeActionMapCharacterInput();
-        UIManager.UI.HealthbarObj.SetActive(true);
-        UIManager.UI.TimerScreen.SetActive(true);
+        if (UIManager.UI.HealthbarObj)
+        {
+            UIManager.UI.HealthbarObj.SetActive(true);
+            UIManager.UI.TimerScreen.SetActive(true);
+        }
+        else
+        {
+            UIManager.UI.ChangeActionMapCharacterInput();
+        }
         transform.parent.gameObject.SetActive(false);
         gameObject.SetActive(false);
     }
-    
-    
+
+
     [System.Serializable]
     public class TextAndCharacter
     {

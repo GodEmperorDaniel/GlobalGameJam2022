@@ -38,8 +38,9 @@ public class PowerUPObject : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
+        Debug.Log("collided");
         CharacterInformation ci;
-        if (other.gameObject.TryGetComponent<CharacterInformation>(out ci))
+        if (other.gameObject.transform.parent.TryGetComponent<CharacterInformation>(out ci))
         {
             if (ci._character == CharacterENUM.TILDA)
             {

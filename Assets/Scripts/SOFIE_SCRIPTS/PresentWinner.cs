@@ -4,30 +4,52 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class PresentWinner:MonoBehaviour
+public class PresentWinner : MonoBehaviour
 {
     public PercentageGraffiti percentageGraffiti;
+    public GameObject mortWin;
+    public GameObject tildaWin;
+    public GameObject bothWin;
+    public GameObject playerOne;
+    public GameObject playerTwo;
 
     private void Update()
     {
-        
+
     }
     public void CheckForWinner()
     {
         if (percentageGraffiti.GetWinner() == 1)
         {
-            Debug.Log("TildaWon");;
-            gameObject.transform.Find("TildaWon").transform.gameObject.SetActive(true);
+            tildaWin.SetActive(true);
             UIManager.UI.ChangeActionMapUIInput();
+            if (CharacterInformation.players[0]._character == CharacterENUM.TILDA)
+            {
+                playerOne.SetActive(true);
+            }
+            else
+            {
+                playerTwo.SetActive(true);
+            }
         }
         else if (percentageGraffiti.GetWinner() == 2)
         {
-            Debug.Log("MortWon");
-            gameObject.transform.Find("MortWon").transform.gameObject.SetActive(true);
+            mortWin.SetActive(true);
             UIManager.UI.ChangeActionMapUIInput();
-
+            if(CharacterInformation.players[0]._character == CharacterENUM.MORT)
+            {
+                playerOne.SetActive(true);
+            }
+            else
+            {
+                playerTwo.SetActive(true);
+            }
         }
         else
-            Debug.Log("Tie");//gameObject.transform.Find("Tie").transform.gameObject.SetActive(true);
+        {
+            playerOne.SetActive(true);
+            playerTwo.SetActive(true);
+            bothWin.SetActive(true);
+        }
     }
 }

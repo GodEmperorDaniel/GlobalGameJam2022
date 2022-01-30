@@ -22,9 +22,8 @@ public class CharacterSelection : MonoBehaviour
         if (eventSystem.currentSelectedGameObject.name == "LeftButton")
         {
             moveImageToLeft();
-        }
-        
-        if (eventSystem.currentSelectedGameObject.name == "RightButton")
+        }   
+        else if (eventSystem.currentSelectedGameObject.name == "RightButton")
         {
             moveImageToRight();
         }

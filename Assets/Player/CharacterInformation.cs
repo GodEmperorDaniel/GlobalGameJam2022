@@ -31,12 +31,10 @@ public class CharacterInformation : MonoBehaviour
     public GameObject parent;
     public GameObject defaultButton;
     [Header("Playable Character things")]
-    public GameObject mortModel;
-    public GameObject mortArm;
-    public GameObject tildaModel;
-    public GameObject tildArm;
-    public RuntimeAnimatorController tildaAnim;
-    public RuntimeAnimatorController mortAnim;
+    public GameObject tildaGameObject;
+    public GameObject mortGameObject;
+    public Animator tildaAnim;
+    public Animator mortAnim;
 
     public void spawnPlayerImage()
     {
@@ -52,8 +50,6 @@ public class CharacterInformation : MonoBehaviour
             go.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, -62, 0);
             go.GetComponent<Image>().sprite = player2;
         }
-
-
         es.SetSelectedGameObject(defaultButton);
 
         go.GetComponent<CharacterSelection>().eventSystem = es;
@@ -111,18 +107,16 @@ public class CharacterInformation : MonoBehaviour
     }
     public void SetCharacterAnim()
     {
-        Animator anim = GetComponent<Animator>();
+        MovementScript move = GetComponent<MovementScript>();
         switch (_character)
         {
             case CharacterENUM.MORT:
-                anim.runtimeAnimatorController = mortAnim;
+                move._anim = mortAnim;
                 break;
             case CharacterENUM.TILDA:
-                anim.runtimeAnimatorController = tildaAnim;
-                Destroy(mortArm);
-                Destroy(mortModel);
-                Instantiate(tildaModel,transform).name = "Tilda";
-                Instantiate(tildArm, transform).name = "Armature";
+                mortGameObject.SetActive(false);
+                tildaGameObject.SetActive(true);
+                move._anim = tildaAnim;
                 break;
             case CharacterENUM.NONE:
                 Debug.LogWarning("NOW SOMETHING WENT VERY WRONG WHEN SETTING ANIMATION");
@@ -134,7 +128,7 @@ public class CharacterInformation : MonoBehaviour
     }
     private void Awake()
     {
-        transform.position = new Vector3(0, UnityEngine.Random.Range(2f,20f));
+        transform.position = new Vector3(UnityEngine.Random.Range(2f, 20f), UnityEngine.Random.Range(2f,20f));
         if (!players.Contains(this))
         {
             players.Add(this);
@@ -160,7 +154,7 @@ public class MortSettings
     public float _jumpCooldown = 0;
     public float _jumpDuration = 0.5f;
     public float _climbSpeed = 5;
-    public float _characterHeight = 1;
+    public float _characterHeight = 5;
     public float _cleanOrGraffitiMultiplier = 1;
 }
 
@@ -171,6 +165,6 @@ public class TildaSettings
     public float _jumpCooldown = 0;
     public float _jumpDuration = 0.5f;
     public float _climbSpeed = 1;
-    public float _characterHeight = 1;
+    public float _characterHeight = 5;
     public float _cleanOrGraffitiMultiplier = 1;
 }

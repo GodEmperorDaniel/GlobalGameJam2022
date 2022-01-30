@@ -10,6 +10,7 @@ public class WallDetector
     public void interactingWithWall(Transform tran, ref InputValue c, CharacterInformation charInfo, bool blockTag = false)
     {
         int contactDistance = 2;
+        int contactDistanceDown = 3;
         int layerMask = 1 << 6;
         Ray ray = new Ray(tran.position, tran.forward);
         Ray rayDown = new Ray(tran.position, - tran.up);
@@ -36,7 +37,7 @@ public class WallDetector
                 CallGrafitti(hit, c, charInfo);
             }
         }
-        else if (Physics.Raycast(rayDown, out hit, contactDistance, layerMask))
+        else if (Physics.Raycast(rayDown, out hit, contactDistanceDown, layerMask))
         {
             Debug.DrawLine(ray.origin, hit.point, Color.red);
             if (charInfo._character == CharacterENUM.MORT)
@@ -67,7 +68,7 @@ public class WallDetector
         if (graffiting != null)
         {
             graffiting.startFadeIn(c, charInfo);
-            //Debug.Log("TRÄFF");
+            //Debug.Log("TRï¿½FF");
         }
         else
         {
@@ -80,7 +81,7 @@ public class WallDetector
         if (graffiting != null)
         {
             graffiting.startFadeOut(c, charInfo);
-            //Debug.Log("TRÄFF");
+            //Debug.Log("TRï¿½FF");
         }
         else
         {

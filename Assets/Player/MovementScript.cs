@@ -27,16 +27,19 @@ public class MovementScript : MonoBehaviour
 
     WallDetector wallDetector = new WallDetector();
 
-    private Animator _anim;
+    public Animator _anim = null;
     private void Start()
     {
         charInfo = GetComponent<CharacterInformation>();
         rb = GetComponent<Rigidbody>();
-        _anim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
+        if(!_anim)
+        {
+            return;
+        }
         if (charInfo.es.isActiveAndEnabled) return;
         Vector3 newVel = Vector3.zero;
         if (_isClimbing) //climbing

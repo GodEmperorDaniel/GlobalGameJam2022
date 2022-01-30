@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+//OBS WORK OUT BUG MARKED IN THIS CODE!
 public class UIInputs : MonoBehaviour
 {
     private CharacterInformation charInfo;
@@ -97,33 +98,32 @@ public class UIInputs : MonoBehaviour
     }
     public void ActivateMyEventSystem()
     {
+        EventSystem.current.gameObject.SetActive(false);
+        if (!charInfo.es.isActiveAndEnabled)
+        {
+            charInfo.es.gameObject.SetActive(true);
+        }
         EventSystem.current = charInfo.es;
     }
 
     public void OnSkip()
     {
-        if (UIManager.UI.DialogueScreen.activeInHierarchy)
+        if (!UIManager.UI.characterSelectObject.activeInHierarchy)
         {
-            if (choosenCharacter == CharacterENUM.MORT)
+            if (UIManager.UI.DialogueScreen.activeInHierarchy)
             {
                 UIManager.UI.TildaBubble.OnSkipDialogue();
             }
-            else
+            else if (UIManager.UI.CreditsCanvas.activeSelf)
             {
-                UIManager.UI.TildaBubble.OnSkipDialogue();
+                UIManager.UI.PlayGameAgain();
+            }
+            //OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS OBS 
+            else if (UIManager.UI.WinScreen.activeSelf) //this can cause bug in countdown screen!
+            {
+                UIManager.UI.DoCreditsNow();
             }
         }
-        
-        else if (UIManager.UI.CreditsCanvas.activeSelf)
-        {
-            UIManager.UI.PlayGameAgain();
-        }
-        
-        else if (UIManager.UI.WinScreen.activeSelf)
-        {
-            UIManager.UI.DoCreditsNow();
-        }
-
     }
 
     public void OnFlipTheCard()
@@ -137,5 +137,5 @@ public class UIInputs : MonoBehaviour
             UIManager.UI.FlipThePictureTilda();
         }
     }
-    
+
 }
