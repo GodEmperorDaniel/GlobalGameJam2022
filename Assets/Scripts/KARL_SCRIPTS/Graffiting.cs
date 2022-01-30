@@ -65,10 +65,6 @@ public class Graffiting : MonoBehaviour
                 myModel.material.color = color;
             }
         }
-        else
-        {
-            Debug.Log("GET BLOCKED");
-        }
     }
 
     public void startFadeOut(UnityEngine.InputSystem.InputValue c, CharacterInformation charInfo)
