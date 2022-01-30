@@ -11,7 +11,7 @@ public class WallDetector
     //{
     //    interactingWithWall(this.transform);
     //}
-    public void interactingWithWall(Transform tran, ref InputValue c, CharacterInformation charInfo) //
+    public void interactingWithWall(Transform tran, ref InputValue c, CharacterInformation charInfo, bool blockTag = false)
     {
         int contactDistance = 2;
         int layerMask = 1 << 6;
@@ -24,7 +24,14 @@ public class WallDetector
             Debug.DrawLine(ray.origin, hit.point, Color.red);
             if (charInfo._character == CharacterENUM.MORT)
             {
-                CallCleaning(hit, c, charInfo);
+                if (blockTag)
+                {
+                    TagBlocker(hit, charInfo);
+                }
+                else
+                {
+                    CallCleaning(hit, c, charInfo);
+                }
             }
             else
             {
@@ -46,6 +53,14 @@ public class WallDetector
         else
         {
             Debug.DrawLine(ray.origin, ray.origin + ray.direction * 100, Color.green);
+        }
+    }
+    private void TagBlocker(RaycastHit hit, CharacterInformation charInfo)
+    {
+        Graffiting graffiting = hit.collider.gameObject.GetComponent(typeof(Graffiting)) as Graffiting;
+        if (graffiting != null)
+        {
+            graffiting.ActivateNoTag(charInfo.GetComponent<MovementScript>().tagBlockDuration);
         }
     }
     private void CallGrafitti(RaycastHit hit, InputValue c, CharacterInformation charInfo)
@@ -72,6 +87,6 @@ public class WallDetector
         else
         {
             Debug.Log("Hittar inte cleaning");
-        } 
+        }
     }
 }
