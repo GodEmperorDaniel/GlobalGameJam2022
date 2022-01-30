@@ -93,8 +93,8 @@ public class MovementScript : MonoBehaviour
     {
         Vector2 normDirection = c.Get<Vector2>().normalized;
         Vector3 direction = new Vector3(normDirection.x, 0, normDirection.y);
-        Debug.Log("nothing to see here");
-        Vector3 dirRelativeCamera = Camera.current.transform.TransformDirection(direction);
+        Debug.Log(Camera.main.name);
+        Vector3 dirRelativeCamera = Camera.main.transform.TransformDirection(direction);
         _moveVec = dirRelativeCamera * charInfo._movementSpeed;
         Debug.Log(_moveVec);
     }
