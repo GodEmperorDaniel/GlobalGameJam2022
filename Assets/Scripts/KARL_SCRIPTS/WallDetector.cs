@@ -11,14 +11,34 @@ public class WallDetector
     //{
     //    interactingWithWall(this.transform);
     //}
-    public void interactingWithWall(Transform tran, ref InputValue c, CharacterInformation charInfo) //
+    public void interactingWithWall(Transform tran, ref InputValue c, CharacterInformation charInfo, bool blockTag = false)
     {
         int contactDistance = 2;
         int layerMask = 1 << 6;
         Ray ray = new Ray(tran.position, tran.forward);
+        Ray rayDown = new Ray(tran.position, -tran.up);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, contactDistance, layerMask))
+        {
+            Debug.DrawLine(ray.origin, hit.point, Color.red);
+            if (charInfo._character == CharacterENUM.MORT)
+            {
+                if (blockTag)
+                {
+                    TagBlocker(hit, charInfo);
+                }
+                else
+                {
+                    CallCleaning(hit, c, charInfo);
+                }
+            }
+            else
+            {
+                CallGrafitti(hit, c, charInfo);
+            }
+        }
+        else if (Physics.Raycast(rayDown, out hit, contactDistance, layerMask))
         {
             Debug.DrawLine(ray.origin, hit.point, Color.red);
             if (charInfo._character == CharacterENUM.MORT)
@@ -35,7 +55,14 @@ public class WallDetector
             Debug.DrawLine(ray.origin, ray.origin + ray.direction * 100, Color.green);
         }
     }
-
+    private void TagBlocker(RaycastHit hit, CharacterInformation charInfo)
+    {
+        Graffiting graffiting = hit.collider.gameObject.GetComponent(typeof(Graffiting)) as Graffiting;
+        if (graffiting != null)
+        {
+            graffiting.ActivateNoTag(charInfo.GetComponent<MovementScript>().tagBlockDuration);
+        }
+    }
     private void CallGrafitti(RaycastHit hit, InputValue c, CharacterInformation charInfo)
     {
         Graffiting graffiting = hit.collider.gameObject.GetComponent(typeof(Graffiting)) as Graffiting;
@@ -59,7 +86,7 @@ public class WallDetector
         }
         else
         {
-            Debug.Log("Hittar inte graffiting");
-        } 
+            Debug.Log("Hittar inte cleaning");
+        }
     }
 }

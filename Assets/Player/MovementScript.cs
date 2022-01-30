@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class MovementScript : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class MovementScript : MonoBehaviour
     public bool PowerUp1;
     public bool PowerUp2;
     [SerializeField] private float _doubleJumpTime = 10;
+    public float tagBlockDuration = 10;
     [SerializeField] private float _cleanAndGraffitiBuffTime = 10;
 
     WallDetector wallDetector = new WallDetector();
@@ -51,6 +53,7 @@ public class MovementScript : MonoBehaviour
             newVel = new Vector3(_moveVec.x, _isJumping ? charInfo._jumpSpeed : 0, _moveVec.z);
         }
         rb.velocity = newVel * Time.fixedDeltaTime * _MULTIPLIER;
+        //rb.AddForce(newVel * Time.fixedDeltaTime * _MULTIPLIER);
     }
     private bool CheckIfInAir()
     {
@@ -87,11 +90,13 @@ public class MovementScript : MonoBehaviour
         }
         return false;
     }
-    public void OnMoving(InputValue c)
+    public void OnMoving(InputValue c) //add set forward to this c 
     {
         Vector2 normDirection = c.Get<Vector2>().normalized;
         Vector3 direction = new Vector3(normDirection.x, 0, normDirection.y);
-        _moveVec = direction * charInfo._movementSpeed;
+        Vector3 dirRelativeCamera = Camera.main.transform.TransformDirection(direction);
+        _moveVec = dirRelativeCamera * charInfo._movementSpeed;
+        Debug.Log(_moveVec);
     }
 
     public void OnJumpClimb()
@@ -170,13 +175,13 @@ public class MovementScript : MonoBehaviour
         }
     }
     //doublejump & no tag!
-    public void OnPowerUp2()
+    public void OnPowerUp2(InputValue c)
     {
         if (PowerUp2)
         {
             if (charInfo._character == CharacterENUM.MORT)
             {
-
+                wallDetector.interactingWithWall(transform, ref c, charInfo, true);
             }
             else
             {

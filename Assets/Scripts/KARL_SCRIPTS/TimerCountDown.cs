@@ -6,11 +6,15 @@ using System;
 
 public class TimerCountDown : MonoBehaviour
 {
+    public PresentWinner presentWinner;
+    [Header("Countdown Starter: ")]
     public int countDownTime;
     public Text countDownDisplay;
 
     private float currentTime = 0f;
     private bool startTimer;
+
+    [Header("Countdown Timer: ")]
     public float startingTime = 10f;
     [SerializeField] Text counterText;
 
@@ -28,7 +32,8 @@ public class TimerCountDown : MonoBehaviour
             if (currentTime <= 0)
             {
                 currentTime = 0;
-                //KAlla på något
+                //KAlla på den som vann
+                presentWinner.CheckForWinner();
             }
         }
         

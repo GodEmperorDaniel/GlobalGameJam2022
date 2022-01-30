@@ -1,11 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PowerUPObject : MonoBehaviour
 {
     public PowerUpEnum powerUp;
     public float rotationSpeed = 10;
+    public Sprite tildaPowerUp1;
+    public Sprite tildaPowerUp2;
+    public Sprite mortPowerUp1;
+    public Sprite mortPowerUp2;
+    private void Awake()
+    {
+        Image i = GetComponent<Image>();
+        switch (powerUp)
+        {
+            case PowerUpEnum.DOUBLEJUMP:
+                i.sprite = tildaPowerUp2;
+                break;
+            case PowerUpEnum.FASTTAG:
+                i.sprite = tildaPowerUp1;
+                break;
+            case PowerUpEnum.NOTAGS:
+                i.sprite = tildaPowerUp2;
+                break;
+            case PowerUpEnum.SPEEDYCLEAN:
+                i.sprite = tildaPowerUp1;
+                break;
+            default:
+                break;
+        }
+    }
     private void Update()
     {
         transform.eulerAngles = new Vector3(transform.rotation.eulerAngles.x, (transform.rotation.eulerAngles.y + rotationSpeed % 360), transform.rotation.eulerAngles.z);
