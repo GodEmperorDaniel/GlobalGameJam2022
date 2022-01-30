@@ -27,10 +27,12 @@ public class MovementScript : MonoBehaviour
 
     WallDetector wallDetector = new WallDetector();
 
+    private Animator _anim;
     private void Start()
     {
         charInfo = GetComponent<CharacterInformation>();
         rb = GetComponent<Rigidbody>();
+        _anim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -41,6 +43,7 @@ public class MovementScript : MonoBehaviour
         {
             if (_moveVec.magnitude > 0.1f)
             {
+                _anim.SetBool("Climbing", true);
                 newVel = new Vector3(0, charInfo._climbSpeed);
             }
         }
@@ -53,6 +56,7 @@ public class MovementScript : MonoBehaviour
         {
             newVel = new Vector3(_moveVec.x, _isJumping ? charInfo._jumpSpeed : 0, _moveVec.z);
         }
+        _anim.SetFloat("Speed", _moveVec.magnitude);
         rb.velocity = newVel * Time.fixedDeltaTime * _MULTIPLIER;
     }
     private bool CheckIfInAir()
@@ -121,6 +125,7 @@ public class MovementScript : MonoBehaviour
         else if (c_jumpCooldown == null)
         {
             _isJumping = true;
+            _anim.SetTrigger("Jump");
             c_jumpCooldown = StartCoroutine(JumpCooldown());
         }
         else
@@ -152,6 +157,7 @@ public class MovementScript : MonoBehaviour
         if (charInfo._character == CharacterENUM.MORT)
         {
             //test do clean
+            _anim.SetTrigger("CleaningAndGraffiting");
             wallDetector.interactingWithWall(transform, ref c, charInfo);
         }
         else
@@ -212,6 +218,7 @@ public class MovementScript : MonoBehaviour
         {
             _canClimb = false;
             _isClimbing = false;
+            _anim.SetBool("Climbing", false);
         }
     }
 }

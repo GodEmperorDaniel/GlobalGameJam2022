@@ -190,17 +190,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
---- !u!114 &152394857 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5988478178113834649, guid: c7dee216010537e4db109f311aeb45cb, type: 3}
-  m_PrefabInstance: {fileID: 5988478177503074255}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a171c9bab47f96046b5828e6cd65a875, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &201562515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,34 +1234,6 @@ PrefabInstance:
     - target: {fileID: 5988478178113834647, guid: c7dee216010537e4db109f311aeb45cb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5988478178113834648, guid: c7dee216010537e4db109f311aeb45cb, type: 3}
-      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5988478178113834648, guid: c7dee216010537e4db109f311aeb45cb, type: 3}
-      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5988478178113834648, guid: c7dee216010537e4db109f311aeb45cb, type: 3}
-      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 152394857}
-    - target: {fileID: 5988478178113834648, guid: c7dee216010537e4db109f311aeb45cb, type: 3}
-      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5988478178113834648, guid: c7dee216010537e4db109f311aeb45cb, type: 3}
-      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: AddPlayerCount
-      objectReference: {fileID: 0}
-    - target: {fileID: 5988478178113834648, guid: c7dee216010537e4db109f311aeb45cb, type: 3}
-      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayerJoinAction, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5988478178113834648, guid: c7dee216010537e4db109f311aeb45cb, type: 3}
-      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5988478178113834650, guid: c7dee216010537e4db109f311aeb45cb, type: 3}
       propertyPath: m_Name

@@ -1,11 +1,8 @@
 fileFormatVersion: 2
-guid: fd8984ea60ff0a94bb1b3d25e4a5abb6
+guid: 74c9a31d911363f44815d96f5534ccad
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
-  - first:
-      74: 7046248345829539790
-    second: Armature|Brushing
   - first:
       74: -6129391783841240602
     second: Armature|Climb
@@ -13,29 +10,11 @@ ModelImporter:
       74: -8945691123924629249
     second: Armature|Idle
   - first:
-      74: 1079665108409675491
-    second: Armature|Jump
-  - first:
-      74: -5659771583589459309
-    second: Armature|pCube84Action
-  - first:
-      74: -3349886325625105629
-    second: Armature|pCube85Action
-  - first:
-      74: 4626390053461393240
-    second: Armature|pCube86Action
-  - first:
       74: -7551964380084998518
     second: Armature|Run
   - first:
-      74: 5886054168805222192
-    second: Mop|pCube84Action
-  - first:
-      74: -5311103073406844066
-    second: Mop|pCube85Action
-  - first:
-      74: 3418748382402989304
-    second: Mop|pCube86Action
+      74: -1646110668781940118
+    second: Armature|Spraying
   externalObjects: {}
   materials:
     materialImportMode: 2

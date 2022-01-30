@@ -31,8 +31,10 @@ public class CharacterInformation : MonoBehaviour
     public GameObject parent;
     public GameObject defaultButton;
     [Header("Playable Character things")]
-    public GameObject tilda;
-    public GameObject mort;
+    public GameObject mortModel;
+    public GameObject mortArm;
+    public GameObject tildaModel;
+    public GameObject tildArm;
     public RuntimeAnimatorController tildaAnim;
     public RuntimeAnimatorController mortAnim;
 
@@ -87,6 +89,10 @@ public class CharacterInformation : MonoBehaviour
                 break;
             case CharacterENUM.TILDA:
                 anim.runtimeAnimatorController = tildaAnim;
+                Destroy(mortArm);
+                Destroy(mortModel);
+                Instantiate(tildaModel,transform).name = "Tilda";
+                Instantiate(tildArm, transform).name = "Armature";
                 break;
             case CharacterENUM.NONE:
                 Debug.LogWarning("NOW SOMETHING WENT VERY WRONG WHEN SETTING ANIMATION");

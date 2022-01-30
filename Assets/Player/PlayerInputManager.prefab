@@ -53,7 +53,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5988478178113834649}
         m_TargetAssemblyTypeName: PlayerJoinAction, Assembly-CSharp
-        m_MethodName: SetPlayerToController
+        m_MethodName: AddPlayerCount
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

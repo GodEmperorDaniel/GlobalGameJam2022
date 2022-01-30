@@ -82,9 +82,11 @@ public class UIManager : MonoBehaviour
                 if(p._character == CharacterENUM.MORT)
                 {
                     p.transform.position = SpawnPoint.spawn.mort.transform.position;
+                    //p.SetCharacterAnim();
                 }
                 else
                 {
+                    //p.SetCharacterAnim();
                     p.transform.position = SpawnPoint.spawn.tilda.transform.position;
                 }
             }
