@@ -4,19 +4,17 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class PresentWinner : MonoBehaviour
+public class PresentWinner:MonoBehaviour
 {
+    public PercentageGraffiti percentageGraffiti;
+
     private void Update()
     {
-        if(//tildaWon == true)
-        gameObject.transform.Find("TildaWon").transform.gameObject.SetActive(true);
-        
-        else if(//tildaWon==false)
-        gameObject.transform.Find("MortWon").transform.gameObject.SetActive(true);
-        
+        if (percentageGraffiti.GetWinner() == 1)
+            Debug.Log("TildaWon");//gameObject.transform.Find("TildaWon").transform.gameObject.SetActive(true);
+        else if (percentageGraffiti.GetWinner() == 2)
+            Debug.Log("MortWon");//gameObject.transform.Find("MortWon").transform.gameObject.SetActive(true);
         else
-        {
-            gameObject.transform.Find("Tie").transform.gameObject.SetActive(true);
-        }
+            Debug.Log("Tie");//gameObject.transform.Find("Tie").transform.gameObject.SetActive(true);
     }
 }
