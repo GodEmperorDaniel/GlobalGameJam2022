@@ -62,7 +62,7 @@ public class Dialogue : MonoBehaviour
         {
             UIManager.UI.ChangeActionMap();
             transform.parent.gameObject.SetActive(false);
-            //gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 
@@ -84,6 +84,7 @@ public class Dialogue : MonoBehaviour
         //players can move again here
         UIManager.UI.ChangeActionMap();
         transform.parent.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
     
     

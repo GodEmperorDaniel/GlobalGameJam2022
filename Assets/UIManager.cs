@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
@@ -72,8 +73,10 @@ public class UIManager : MonoBehaviour
         foreach (CharacterInformation p in CharacterInformation.players)
         {
             p.es.gameObject.SetActive(false);
-            Debug.Log(p._character);
-            p.transform.position = p._character == CharacterENUM.MORT ? SpawnPoint.spawn.mort.transform.position : SpawnPoint.spawn.tilda.transform.position;
+            if(SpawnPoint.spawn)
+            {
+                p.transform.position = p._character == CharacterENUM.MORT ? SpawnPoint.spawn.mort.transform.position : SpawnPoint.spawn.tilda.transform.position;
+            }
         }
         characterSelectObject.SetActive(false);
     }
@@ -82,6 +85,11 @@ public class UIManager : MonoBehaviour
         foreach (CharacterInformation p in CharacterInformation.players)
         {
             p.GetComponent<PlayerInput>().SwitchCurrentActionMap("CharacterInput");
+            EventSystem tempES = p.GetComponentInChildren<EventSystem>();
+            if(tempES && tempES.gameObject.activeInHierarchy)
+            {
+                tempES.gameObject.SetActive(false);
+            }
         }
     }
     public void SetPowerUpImage(Image i, bool haveIt)

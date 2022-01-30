@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class MovementScript : MonoBehaviour
 {
@@ -51,6 +52,7 @@ public class MovementScript : MonoBehaviour
             newVel = new Vector3(_moveVec.x, _isJumping ? charInfo._jumpSpeed : 0, _moveVec.z);
         }
         rb.velocity = newVel * Time.fixedDeltaTime * _MULTIPLIER;
+        //rb.AddForce(newVel * Time.fixedDeltaTime * _MULTIPLIER);
     }
     private bool CheckIfInAir()
     {
@@ -91,7 +93,10 @@ public class MovementScript : MonoBehaviour
     {
         Vector2 normDirection = c.Get<Vector2>().normalized;
         Vector3 direction = new Vector3(normDirection.x, 0, normDirection.y);
-        _moveVec = direction * charInfo._movementSpeed;
+        Debug.Log("nothing to see here");
+        Vector3 dirRelativeCamera = Camera.current.transform.TransformDirection(direction);
+        _moveVec = dirRelativeCamera * charInfo._movementSpeed;
+        Debug.Log(_moveVec);
     }
 
     public void OnJumpClimb()
