@@ -76,7 +76,6 @@ public class UIManager : MonoBehaviour
     {
         foreach (CharacterInformation p in CharacterInformation.players)
         {
-<<<<<<< Updated upstream
             p.es.gameObject.SetActive(false);
             if(SpawnPoint.spawn)
             {
@@ -89,13 +88,6 @@ public class UIManager : MonoBehaviour
                     p.transform.position = SpawnPoint.spawn.tilda.transform.position;
                 }
             }
-=======
-            p.es.gameObject.SetActive(false);
-            if(SpawnPoint.spawn)
-            {
-                p.transform.position = p._character == CharacterENUM.MORT ? SpawnPoint.spawn.mort.transform.position : SpawnPoint.spawn.tilda.transform.position;
-            }
->>>>>>> Stashed changes
         }
         characterSelectObject.SetActive(false);
     }
