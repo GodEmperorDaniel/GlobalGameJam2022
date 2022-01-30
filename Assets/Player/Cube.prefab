@@ -370,3 +370,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   choosenCharacter: 2
+  dialogueIsRunning: 1

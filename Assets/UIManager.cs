@@ -11,7 +11,10 @@ public class UIManager : MonoBehaviour
     public static UIManager UI;
     public GameObject defaulButton;
     public TextMeshProUGUI xFor;
-    [HideInInspector] public bool ready; 
+    [HideInInspector] public bool ready;
+    public Dialogue TildaBubble;
+    public Dialogue MortBubble;
+
 
     private void Awake()
     {
@@ -49,6 +52,7 @@ public class UIManager : MonoBehaviour
             p.es.gameObject.SetActive(false);
             p.GetComponent<PlayerInput>().SwitchCurrentActionMap("CharacterInput"); 
         }
+        
         gameObject.SetActive(false);
     }
     public bool CheckIfBothSelectedCharacter()

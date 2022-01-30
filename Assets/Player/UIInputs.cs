@@ -7,6 +7,7 @@ public class UIInputs : MonoBehaviour
 {
     private CharacterInformation charInfo;
     public CharacterENUM choosenCharacter = CharacterENUM.NONE;
+    public bool dialogueIsRunning;
     private void Awake()
     {
         charInfo = GetComponent<CharacterInformation>();
@@ -33,7 +34,8 @@ public class UIInputs : MonoBehaviour
         {
             ActivateMyEventSystem();
         }
-        if (GoodSelections() && UIManager.UI.gameObject.activeInHierarchy)
+        //kommer skapa bugg. Kommer bara in i den här funktionen.
+        if (GoodSelections() && UIManager.UI.gameObject.activeInHierarchy && !dialogueIsRunning)
         {
             if (charInfo.es.currentSelectedGameObject.name == "RightButton" && choosenCharacter != CharacterENUM.MORT)
             {
@@ -48,6 +50,7 @@ public class UIInputs : MonoBehaviour
             else
             {
                 UIManager.UI.StartGame();
+                dialogueIsRunning = true;
                 foreach (CharacterInformation p in CharacterInformation.players)
                 {
                     if (p == charInfo)
@@ -68,6 +71,19 @@ public class UIInputs : MonoBehaviour
                 }
             }
         }
+        
+
+        else if(dialogueIsRunning )//&& UIManager.UI.gameObject.activeInHierarchy)
+        {
+            if (choosenCharacter == CharacterENUM.MORT)
+            {
+                UIManager.UI.MortBubble.ButtonForDialoguePressed();
+            }
+            else
+            {
+                UIManager.UI.TildaBubble.ButtonForDialoguePressed();
+            }
+        }
     }
     private bool GoodSelections()
     {
@@ -84,5 +100,18 @@ public class UIInputs : MonoBehaviour
     public void ActivateMyEventSystem()
     {
         EventSystem.current = charInfo.es;
+    }
+    
+    public void OnSkip()
+    {
+        if (choosenCharacter == CharacterENUM.MORT)
+        {
+            UIManager.UI.MortBubble.OnSkipDialogue();
+        }
+        else
+        {
+            UIManager.UI.TildaBubble.OnSkipDialogue();
+        }
+           
     }
 }

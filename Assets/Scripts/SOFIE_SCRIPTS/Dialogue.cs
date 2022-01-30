@@ -4,12 +4,16 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class Dialogue : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
-    public string[] lines;
     public float textSpeed;
+    public List<TextAndCharacter> dialogueForBoth = new List<TextAndCharacter>();
+    public Vector3 MortBubblePosition;
+    public Vector3 TildaBubblePosition;
+    public GameObject dialogueText;
 
     private int index;
 
@@ -22,40 +26,66 @@ public class Dialogue : MonoBehaviour
     void StartDialogue()
     {
         index = 0;
-        StartCoroutine(TypeLine());
+        StartCoroutine(TypeDialogue());
     }
 
-    IEnumerator TypeLine()
+    IEnumerator TypeDialogue()
     {
-        foreach (char c in lines[index].ToCharArray())
+        if(dialogueForBoth[index].character is CharacterENUM.MORT)
+        {
+            GetComponent<RectTransform>().anchoredPosition = MortBubblePosition;
+            GetComponent<RectTransform>().eulerAngles = new Vector3(0,0,0);
+            dialogueText.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else
+        {
+            GetComponent<RectTransform>().anchoredPosition = TildaBubblePosition;
+            GetComponent<RectTransform>().eulerAngles = new Vector3(0,180,0);
+            dialogueText.transform.localScale = new Vector3(-1, 1, 1);
+        }
+        foreach (char c in dialogueForBoth[index].text)
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
+        
     }
 
     void nextLine()
     {
-        if (index < lines.Length - 1)
+        if (index < dialogueForBoth.Count - 1)
         {
             index++;
             textComponent.text = string.Empty;
-            StartCoroutine(TypeLine());
-            gameObject.SetActive(false); 
+            StartCoroutine(TypeDialogue());
         }
+        else gameObject.SetActive(false); 
     }
 
-    public void OnAccept()
+    public void ButtonForDialoguePressed()
     {
-        Debug.Log("button pressed");
-        if (textComponent.text == lines[index])
+        if (textComponent.text == dialogueForBoth[index].text)
         {
             nextLine();
         }
         else
         {
             StopAllCoroutines();
-            textComponent.text = lines[index];
+            textComponent.text = dialogueForBoth[index].text;
         }
+    }
+
+    public void OnSkipDialogue()
+    {
+        //players can move again here
+        transform.parent.gameObject.SetActive(false);
+    }
+    
+    [System.Serializable]
+    public class TextAndCharacter
+    {
+        public CharacterENUM character;
+        [TextArea]
+        public string text;
     }
 }
