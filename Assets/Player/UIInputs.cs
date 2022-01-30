@@ -75,7 +75,7 @@ public class UIInputs : MonoBehaviour
         {
             if (choosenCharacter == CharacterENUM.MORT)
             {
-                UIManager.UI.MortBubble.ButtonForDialoguePressed();
+                UIManager.UI.TildaBubble.ButtonForDialoguePressed();
             }
             else
             {
@@ -102,7 +102,7 @@ public class UIInputs : MonoBehaviour
 
     public void OnSkip()
     {
-        if (!UIManager.UI.characterSelectObject.activeInHierarchy)
+        if (UIManager.UI.DialogueScreen.activeInHierarchy)
         {
             if (choosenCharacter == CharacterENUM.MORT)
             {
@@ -112,6 +112,16 @@ public class UIInputs : MonoBehaviour
             {
                 UIManager.UI.TildaBubble.OnSkipDialogue();
             }
+        }
+        
+        else if (UIManager.UI.CreditsCanvas.activeSelf)
+        {
+            UIManager.UI.PlayGameAgain();
+        }
+        
+        else if (UIManager.UI.WinScreen.activeSelf)
+        {
+            UIManager.UI.DoCreditsNow();
         }
 
     }
@@ -127,20 +137,5 @@ public class UIInputs : MonoBehaviour
             UIManager.UI.FlipThePictureTilda();
         }
     }
-
-    public void OnGoToCredits()
-    {
-        if (UIManager.UI.WinScreen.activeSelf)
-        {
-            UIManager.UI.DoCreditsNow();
-        }
-    }
-
-    public void OnGoToMenu()
-    {
-        if (UIManager.UI.CreditsCanvas.activeSelf)
-        {
-            UIManager.UI.PlayGameAgain();
-        }
-    }
+    
 }
